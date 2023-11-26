@@ -4,14 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "cross-env npm run remap && node chat.js",
+    "start:admin": "cross-env npm run remap && isAdminMode=true node chat.js",
+    "remap": "cross-env node remapped.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.2",
     "cross-env": "^7.0.3",
-    "eslint": "^8.54.0",
-    "node-telegram-bot-api": "^0.64.0"
+    "node-fetch": "^3.3.2",
+    "node-telegram-bot-api": "^0.64.0",
+    "openai": "^4.20.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.54.0"
   }
 }
