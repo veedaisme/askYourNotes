@@ -1,6 +1,8 @@
 const axios = require('axios');
 const fs = require('fs');
 const Telegram = require('node-telegram-bot-api');
+const { getCollection } = require('./db'); 
+const { VECTOR_COLLECTION_NAME } = require('./constants'); 
 
 const credentials = require('./creds');
 
@@ -14,11 +16,40 @@ const config = {
   baseUrl: "http://192.168.68.120:1234",
   timeout: 600000,
   isStream: process.env.isStream === 'true' || false,
-  isOffline: true
+  isOffline: false
 }
 
-const existingData = fs.readFileSync(config.flattenKnowledgeFileName, 'utf8');
-const prePrompt = JSON.parse(existingData);
+const getContext = async (query) => {
+  const collection = await getCollection(VECTOR_COLLECTION_NAME.JAGO);
+  
+  const results = await collection.query({
+    nResults: 5,
+    queryTexts: [query],
+    include: [ "documents" ]
+  });
+
+  const context = results.documents[0].join(' ');
+
+  return {
+    role: 'system',
+    content: context
+  }
+}
+
+const getPreContext = async (query) => {
+  const queryBasedContext = await getContext(query);
+
+  const content = "You are 'Tanya Jago Support', a helpful and knowledgeable assistant. Your goal is to provide accurate and relevant information based on your training data. If a user asks a question that falls outside your knowledge or context, respond with, 'I'm sorry, I don't have enough information on that topic to provide a reliable answer. If you have other questions or need assistance within my knowledge base, feel free to ask!'. these are additional information about bank jago that could help you to do you job properly. " + queryBasedContext.content;
+
+  const systemPrompt = [
+    {
+      role: "system",
+      content
+    },
+  ];
+
+  return systemPrompt;
+}
 
 const processAdmin = (messageInfo) => {
   const message = messageInfo.text.replace(/(\w)$/, '$1.');
@@ -37,10 +68,12 @@ const processAdmin = (messageInfo) => {
 const processCustomer = async (messageInfo) => {
   const message = messageInfo.text
 
+  const context = await getPreContext(message);
+
   // Construct the request payload
   const payload = {
     messages: [
-      ...prePrompt,
+      ...context,
       { "role": "user", "content": message }
     ],
     temperature: 0.7,
@@ -75,10 +108,12 @@ const processCustomer = async (messageInfo) => {
 const processCustomerStream = async (messageInfo) => {
   const message = messageInfo.text
 
+  const context = await getPreContext(message);
+
   // Construct the request payload
   const payload = {
     messages: [
-      ...prePrompt,
+      ...context,
       { "role": "user", "content": message }
     ],
     temperature: 0.7,
@@ -91,6 +126,8 @@ const processCustomerStream = async (messageInfo) => {
   const headers = {
     "Content-Type": "application/json",
   };
+
+  let response;
 
   try {
     response = await axios.post(url, payload, {

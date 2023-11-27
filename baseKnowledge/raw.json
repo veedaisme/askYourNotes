@@ -1,23 +1,7 @@
 [
   {
     "role": "system",
-    "content": "you are a 'Tanya Jago support'. you are a being known for empathy, compliance with regulations, honest if you don't know something and has a problem solving capability to be able to give a support for all Bank Jago Customer."
-  },
-  {
-    "role": "system",
-    "content": "you can answer with you don't know or haven't trained yet when the question related jago but you don't know the answer."
-  },
-  {
-    "role": "system",
-    "content": "better to be honest than making up information which causing miss information to the customer."
-  },
-  {
-    "role": "system",
-    "content": "these are additional information about bank jago that could help you to do you job properly. remember better don't know the answer rather than miss-informed the user."
-  },
-  {
-    "role": "system",
-    "content": "Bank jago company profile: Along with the development of technology and the emergence of the digital-savvy generation in Indonesia, the digital ecosystem is gradually becoming more mature in this country. In the midst of such dynamics, Bank Jago was born and grew.\n\nSpecifically built as a tech-based bank embedded within Indonesia’s digital ecosystem, Bank Jago aspires to enhance the growth of millions through life-focused digital financial solutions.\n\nBank Jago develops banking products and services, both conventional and sharia, that can be utilized by everyone, including retail (consumer), mass market, or micro, small and medium enteRp rises (MSME). The spirit of inclusion drives us to keep on innovating and collaborating with digital economy players."
+    "content": "Bank jago company profile: Along with the development of technology and the emergence of the digital-savvy generation in Indonesia, the digital ecosystem is gradually becoming more mature in this country. In the midst of such dynamics, Bank Jago was born and grew. Specifically built as a tech-based bank embedded within Indonesia’s digital ecosystem, Bank Jago aspires to enhance the growth of millions through life-focused digital financial solutions. Bank Jago develops banking products and services, both conventional and sharia, that can be utilized by everyone, including retail (consumer), mass market, or micro, small and medium enteRp rises (MSME). The spirit of inclusion drives us to keep on innovating and collaborating with digital economy players."
   },
   {
     "role": "system",
@@ -53,7 +37,7 @@
   },
   {
     "role": "system",
-    "content": "Do you want to separate your emergency fund, traveling savings, lunch money and monthly bills?\nYou can, for up to 40 needs in 1 application."
+    "content": "Do you want to separate your emergency fund, traveling savings, lunch money and monthly bills? You can, for up to 40 needs in 1 application."
   },
   {
     "role": "system",
@@ -85,7 +69,7 @@
   },
   {
     "role": "system",
-    "content": "Be hassle-free when making payments where you shop.\nScan the QRIS code to enjoy a cashless payment that is linked to your Spending Pocket."
+    "content": "Be hassle-free when making payments where you shop. Scan the QRIS code to enjoy a cashless payment that is linked to your Spending Pocket."
   },
   {
     "role": "system",
@@ -109,7 +93,7 @@
   },
   {
     "role": "system",
-    "content": "Jago visa debit card is A practical payment method that can be used for transactions at ATM and EDC machines bearing the visa logo.\nLink the card to any Spending Pocket to start transacting."
+    "content": "Jago visa debit card is A practical payment method that can be used for transactions at ATM and EDC machines bearing the visa logo. Link the card to any Spending Pocket to start transacting."
   },
   {
     "role": "system",
@@ -213,7 +197,7 @@
   },
   {
     "role": "system",
-    "content": "Enjoy secure and worry-free transactions\nBank Jago is licensed and supervised by Financial Services Authority (OJK)\nYour money at Bank Jago is guaranteed by LPS, including but not limited to the maximum interest rate and the amount of deposits guaranteed by LPS\nChoose one of fingeRp rint, facial recognition, PIN or password when logging in and completing your transactions\nLogin and transaction notifications available (to be set as per your requirement)"
+    "content": "Enjoy secure and worry-free transactions. Bank Jago is licensed and supervised by Financial Services Authority (OJK). Your money at Bank Jago is guaranteed by LPS, including but not limited to the maximum interest rate and the amount of deposits guaranteed by LPS. Choose one of fingerprint, facial recognition, PIN or password when logging in and completing your transactions. Login and transaction notifications available (to be set as per your requirement)"
   },
   {
     "role": "system",
@@ -229,27 +213,27 @@
   },
   {
     "role": "system",
-    "content": "BI-FAST\n\nBI-FAST is the interbank transfer facility that is faster, more efficient, safe, and real-time by Bank Indonesia.\n\nWith BI-FAST, you can make or receive a transfer up to Rp 250 million by using your phone number or email as your alias (proxy address). This alias is useful as your Pocket number replacement, so you no longer have to memorize your Pocket or account number.\n\nReal-time 24/7: Transfer will be processed real-time, any time\nMore options: You can make or receive a transfer to dozens of other BI-FAST participant banks\nSecure: Each transaction will be equipped with fraud detection and AML/CFT\nEfficient: Use your phone number/email as your account number replacement\nMore affordable: Transfer fee Rp 2.500* for all transfers to other BI-FAST participant banks"
+    "content": "BI-FAST is the interbank transfer facility that is faster, more efficient, safe, and real-time by Bank Indonesia. With BI-FAST, you can make or receive a transfer up to Rp 250 million by using your phone number or email as your alias (proxy address). This alias is useful as your Pocket number replacement, so you no longer have to memorize your Pocket or account number. Real-time 24/7: Transfer will be processed real-time, any time. More options: You can make or receive a transfer to dozens of other BI-FAST participant banks. Secure: Each transaction will be equipped with fraud detection and AML/CFT. Efficient: Use your phone number/email as your account number replacement. More affordable: Transfer fee Rp 2.500* for all transfers to other BI-FAST participant banks."
   },
   {
     "role": "system",
-    "content": "About Bibit Investment Pocket, Bibit Investment Pocket is the information on the value of your portfolio obtained from Bibit displayed on the Jago app. This Pocket will appear under the Pockets tab once you have linked your Jago account with Bibit. \n\nTip: Jago is not responsible for the portfolio data displayed in Jago, which is a product of Bibit."
+    "content": "About Bibit Investment Pocket, Bibit Investment Pocket is the information on the value of your portfolio obtained from Bibit displayed on the Jago app. This Pocket will appear under the Pockets tab once you have linked your Jago account with Bibit.  Tip: Jago is not responsible for the portfolio data displayed in Jago, which is a product of Bibit."
   },
   {
     "role": "system",
-    "content": "How to my view Bibit's mutual fund investments in Jago?\n1. Go to the Pockets menu.\n\n2. Choose one of your Bibit Pocket.\n\n3. You will go to your mutual fund details page in the Bibit app."
+    "content": "How to my view Bibit's mutual fund investments in Jago? 1. Go to the Pockets menu. 2. Choose one of your Bibit Pocket. 3. You will go to your mutual fund details page in the Bibit app."
   },
   {
     "role": "system",
-    "content": "Can I make a transactions in the Bibit Pocket?\n\nNo, all mutual fund transactions, including buying and selling, can only be done on the Bibit app. Jago will only display portfolio information obtained from Bibit."
+    "content": "Can I make a transactions in the Bibit Pocket? No, all mutual fund transactions, including buying and selling, can only be done on the Bibit app. Jago will only display portfolio information obtained from Bibit."
   },
   {
     "role": "system",
-    "content": "Why is there a difference between the Jago app and Bibit information regarding my mutual fund investment value?\n\nThe information displayed in the Jago app is obtained from the Bibit party; when you first link the Bibit account to Jago does not appear in real-time, so there will be differences in information. It will be updated if the link is canceled and re-linked."
+    "content": "Why is there a difference between the Jago app and Bibit information regarding my mutual fund investment value? The information displayed in the Jago app is obtained from the Bibit party; when you first link the Bibit account to Jago does not appear in real-time, so there will be differences in information. It will be updated if the link is canceled and re-linked."
   },
   {
     "role": "system",
-    "content": "How to link Jago RDN to Stockbit?\n\n1. Open Stockbit app\n2. Choose Jago as the RDN Bank\n3. Input your PIN and Jago Bank OTP code to link your account\n4. Complete your data, digital signature, and PIN activation for the RDN\n5. Wait 1 working day for the verification from Stockbit."
+    "content": "How to link Jago RDN to Stockbit? 1. Open Stockbit app. 2. Choose Jago as the RDN Bank. 3. Input your PIN and Jago Bank OTP code to link your account. 4. Complete your data, digital signature, and PIN activation for the RDN. 5. Wait 1 working day for the verification from Stockbit."
   },
   {
     "role": "system",
@@ -265,7 +249,7 @@
   },
   {
     "role": "system",
-    "content": "Save Your Money with Mudharabah Muthlaqah Akad, Plan your future better by saving your money using Mudharabah Muthlaqah.\nThe bank will manage your money according to sharia principles and you can get profit based on the profit sharing ratio that is agreed by you and the Bank."
+    "content": "Save Your Money with Mudharabah Muthlaqah Akad, Plan your future better by saving your money using Mudharabah Muthlaqah. The bank will manage your money according to sharia principles and you can get profit based on the profit sharing ratio that is agreed by you and the Bank."
   },
   {
     "role": "system",
@@ -293,86 +277,86 @@
   },
   {
     "role": "system",
-    "content": "How to Create a Shared Pocket\n\n1. On your Pockets tab, choose the Pocket you wish to change into a Shared Pocket.\n2. Find and tap the Invite button on the top of the screen.\n3. Choose members to invite from your Jago Contact or your Phonebook.\n4. Select a role for the invitee.\n5. Once accepted, your Pocket will automatically change into a Shared Pocket."
+    "content": "How to Create a Shared Pocket 1. On your Pockets tab, choose the Pocket you wish to change into a Shared Pocket. 2. Find and tap the Invite button on the top of the screen. 3. Choose members to invite from your Jago Contact or your Phonebook. 4. Select a role for the invitee. 5. Once accepted, your Pocket will automatically change into a Shared Pocket."
   },
   {
     "role": "system",
-    "content": "how to Inviting people to your Shared Pocket\n1. On your Shared Pocket Details page, tap the Invite button on the top of the screen.\n2. Choose members to invite from your Jago Contact or your Phonebook.\n3. Select a role for the invitee.\n4. Tap Send Invitation and you are done."
+    "content": "how to Inviting people to your Shared Pocket. 1. On your Shared Pocket Details page, tap the Invite button on the top of the screen. 2. Choose members to invite from your Jago Contact or your Phonebook. 3. Select a role for the invitee. 4. Tap Send Invitation and you are done."
   },
   {
     "role": "system",
-    "content": "shared pocket role definition\n\nOwner, Can Spend and Can View\nWhat is an Owner\n\nIn Shared Pocket, a Pocket Owner is the legal owner of the Pocket. The Owner have full access to everything inside the Pocket, just like on a Personal Pocket.\n\nHowever, Pocket Owner also given an extra responsibility to manage every members who joined the Pocket. This includes inviting or removing other users, setting users role, managing transaction limit for collaborators who Can Spend, and setting up a target.\n\nCan Spend or Can View\n\nThe members who joined the Shared Pocket can be assigned into two roles: Can Spend and Can View.\n\nA member who Can Spend is invited by Pocket Owner and given the access to do transactions inside the Pocket. They can connect a Debit Card to the Pocket if it is a Spending Pocket. They can contribute to a shared target and can do autosave inside the Shared Pocket.\n\nA member who Can View is invited by Pocket Owner with limited access, which can only observe transactions done by the Owner and those who Can Spend. They can contribute to a shared target and can do autosave inside the Shared Pocket."
+    "content": "shared pocket role definition Owner, Can Spend and Can View. What is an Owner In Shared Pocket, a Pocket Owner is the legal owner of the Pocket. The Owner have full access to everything inside the Pocket, just like on a Personal Pocket. However, Pocket Owner also given an extra responsibility to manage every members who joined the Pocket. This includes inviting or removing other users, setting users role, managing transaction limit for collaborators who Can Spend, and setting up a target. Can Spend or Can View The members who joined the Shared Pocket can be assigned into two roles: Can Spend and Can View. A member who Can Spend is invited by Pocket Owner and given the access to do transactions inside the Pocket. They can connect a Debit Card to the Pocket if it is a Spending Pocket. They can contribute to a shared target and can do autosave inside the Shared Pocket. A member who Can View is invited by Pocket Owner with limited access, which can only observe transactions done by the Owner and those who Can Spend. They can contribute to a shared target and can do autosave inside the Shared Pocket."
   },
   {
     "role": "system",
-    "content": "Owning a Shared Pocket\n\nEvery personal Pocket can be turned into a Shared Pocket, simply by inviting other users into it.\n\n1. On your Pockets tab, choose the Pocket to change into a Shared Pocket.\n2. Find and tap the Invite button on the top of the screen.\n3. Choose members to invite from your Jago Contact or your Phonebook.\n4. Once accepted, your Pocket will automatically change into a Shared Pocket.\n \n\nInviting Other Users to Your Shared Pocket\n\nTo invite other users as a collaborator inside your Pocket, follow these steps.\n\n1. On the Pocket page, choose the Pocket you want to share with others.\n2. On your Shared Pocket Details page, tap the Invite button on the top of the screen.\n3. Choose members to invite from your Jago Contacts or your Phonebook.\n4. Select a role for the invitee.\n5. Tap Send Invitation and you are done.\n\nTips:\n\nMake sure the phone number you invite has been registered to Jago\nYou can invite up to 29 members to the Shared Pocket\n \nJoining Other User's Shared Pocket\n\nYou can only join a Shared Pocket with an invitation by the Pocket Owner.\n\n1. You will receive a push notification when a Pocket Owner invites you to their Pocket.\n2. Inside the application, the invitation can be found inside the notification button on the dashboard.\n3. Before accepting the invitation, you are prompted to read the terms and conditions for Shared Pocket.\n4. Congratulations! Now you are collaborating inside a Shared Pocket."
+    "content": "Owning a Shared Pocket Every personal Pocket can be turned into a Shared Pocket, simply by inviting other users into it. 1. On your Pockets tab, choose the Pocket to change into a Shared Pocket. 2. Find and tap the Invite button on the top of the screen. 3. Choose members to invite from your Jago Contact or your Phonebook. 4. Once accepted, your Pocket will automatically change into a Shared Pocket.   Inviting Other Users to Your Shared Pocket To invite other users as a collaborator inside your Pocket, follow these steps. 1. On the Pocket page, choose the Pocket you want to share with others. 2. On your Shared Pocket Details page, tap the Invite button on the top of the screen. 3. Choose members to invite from your Jago Contacts or your Phonebook. 4. Select a role for the invitee. 5. Tap Send Invitation and you are done. Tips: Make sure the phone number you invite has been registered to Jago. You can invite up to 29 members to the Shared Pocket.  . Joining Other User's Shared Pocket You can only join a Shared Pocket with an invitation by the Pocket Owner. 1. You will receive a push notification when a Pocket Owner invites you to their Pocket. 2. Inside the application, the invitation can be found inside the notification button on the dashboard. 3. Before accepting the invitation, you are prompted to read the terms and conditions for Shared Pocket. 4. Congratulations! Now you are collaborating inside a Shared Pocket."
   },
   {
     "role": "system",
-    "content": "shared pocket target \n\nSetting Up a Joint Target\n\nA joint target is only available if the Pocket is a Savings Pocket. To set up a joint target, simply follow these steps.\n\n1. On the Shared Pocket Details page, tap the Set Joint Target button.\n2. Set the target you wish to achieve, and add a deadline if you want.\n3. Tap Next.\n4. Choose how you want to split the portion between collaborators; equally, or manually assign a portion.\n5. Tap Next.\n6. Review your target details, and tap the Set Target button to create a joint target.\n\nTip: Only Pocket Owner can create a joint target.\n\nManaging a Joint Target\n\nEditing a joint target can be done from your Shared Pocket Details page.\n\n1. On the Shared Pocket Details page, tap the 3 dots button on the upper right corner of your screen.\n2. Tap Edit joint target button.\n3. You can choose to edit the target & deadline or the portion for the target.\n4. Follow the steps similar to when you create a new target.\n\nTip: Only Pocket Owner can manage a joint target.\n\nDeleting a Joint Target\n\nDeleting a joint target can be done from your Shared Pocket Details page.\n\n1. On the Shared Pocket Details page, tap the 3 dots button on the upper right corner of your screen.\n2. Tap Edit Pocket details button.\n3. Tap the Give up target.\n4. Choose Give Up to stop the joint target.\n\nTip: Only Pocket Owner can stop a joint target."
+    "content": "shared pocket target  Setting Up a Joint Target A joint target is only available if the Pocket is a Savings Pocket. To set up a joint target, simply follow these steps. 1. On the Shared Pocket Details page, tap the Set Joint Target button. 2. Set the target you wish to achieve, and add a deadline if you want. 3. Tap Next. 4. Choose how you want to split the portion between collaborators; equally, or manually assign a portion. 5. Tap Next. 6. Review your target details, and tap the Set Target button to create a joint target. Tip: Only Pocket Owner can create a joint target. Managing a Joint Target Editing a joint target can be done from your Shared Pocket Details page. 1. On the Shared Pocket Details page, tap the 3 dots button on the upper right corner of your screen. 2. Tap Edit joint target button. 3. You can choose to edit the target & deadline or the portion for the target. 4. Follow the steps similar to when you create a new target. Tip: Only Pocket Owner can manage a joint target. Deleting a Joint Target Deleting a joint target can be done from your Shared Pocket Details page. 1. On the Shared Pocket Details page, tap the 3 dots button on the upper right corner of your screen. 2. Tap Edit Pocket details button. 3. Tap the Give up target. 4. Choose Give Up to stop the joint target. Tip: Only Pocket Owner can stop a joint target."
   },
   {
     "role": "system",
-    "content": "To close a Shared Pocket, you have to remove all members manually from your Pocket. After that, you can follow this step.\n\n1. On the Shared Pocket Details page, find the 3 dots button on the upper right corner of the screen.\n2. Tap Close this Pocket button.\n3. Tap Close Now to permanently close the Shared Pocket.\n\nTip: Once closed, you can no longer access the transaction history of the closed Pocket.\n\nAs of December 8, 2021, Pockets can only be closed any day between 01:01 - 23:59 (Western Indonesian Time)"
+    "content": "To close a Shared Pocket, you have to remove all members manually from your Pocket. After that, you can follow this step. 1. On the Shared Pocket Details page, find the 3 dots button on the upper right corner of the screen. 2. Tap Close this Pocket button. 3. Tap Close Now to permanently close the Shared Pocket. Tip: Once closed, you can no longer access the transaction history of the closed Pocket. As of December 8, 2021, Pockets can only be closed any day between 01:01 - 23:59 (Western Indonesian Time)"
   },
   {
     "role": "system",
-    "content": "Collaborator Portion on shared target\nIn making a joint target, you can set a portion for each member. As in the current version of Jago, only an equal split is available. This portion will be the target that needs to be achieved by every single collaborator invited to a Shared Pocket.\n\nFor every new, leaving, or removed member, the portion will be automatically updated to match the calculation.\n\nThe calculation is as follows:\nIndividual portions = (total joint target - current balance) / number of members\n\nAny remaining of the calculation will be charged to the Shared Pocket's Owner."
+    "content": "Collaborator Portion on shared target. In making a joint target, you can set a portion for each member. As in the current version of Jago, only an equal split is available. This portion will be the target that needs to be achieved by every single collaborator invited to a Shared Pocket. For every new, leaving, or removed member, the portion will be automatically updated to match the calculation. The calculation is as follows:. Individual portions = (total joint target - current balance) / number of members Any remaining of the calculation will be charged to the Shared Pocket's Owner."
   },
   {
     "role": "system",
-    "content": "About Shared Pocket Collaborators\nA collaborator inside a Shared Pockets includes the Owner and all the invited users. Every collaborator can contribute to a joint target and can do autosave inside the Shared Pocket.\n\nWhat is an Owner\nIn Shared Pocket, a Pocket Owner is the legal owner of the Pocket. The Owner has full access to everything inside the Pocket, just like on a Personal Pocket.\n\nHowever, Pocket Owner has an extra responsibility to manage every collaborator who joined the Pocket. This includes inviting or removing other users, setting the user's role, managing transaction limit for collaborators who Can Spend, and setting up a target.\n\nCan Spend or Can View\nThe Owner can assign one of these two roles to the members: Can Spend or Can View.\n\nA member who Can Spend can do transactions inside the Pocket.\n\nA member who Can View is given limited access, only to observe transactions done by the Owner and those who Can Spend."
+    "content": "About Shared Pocket Collaborators. A collaborator inside a Shared Pockets includes the Owner and all the invited users. Every collaborator can contribute to a joint target and can do autosave inside the Shared Pocket. What is an Owner. In Shared Pocket, a Pocket Owner is the legal owner of the Pocket. The Owner has full access to everything inside the Pocket, just like on a Personal Pocket. However, Pocket Owner has an extra responsibility to manage every collaborator who joined the Pocket. This includes inviting or removing other users, setting the user's role, managing transaction limit for collaborators who Can Spend, and setting up a target. Can Spend or Can View. The Owner can assign one of these two roles to the members: Can Spend or Can View. A member who Can Spend can do transactions inside the Pocket. A member who Can View is given limited access, only to observe transactions done by the Owner and those who Can Spend."
   },
   {
     "role": "system",
-    "content": "Setting Up Can Spend Limit\nShared Pocket Owner can set Can Spend role for its members. For invited members, the maximum limit per day that can be used is Rp 10,000,000.\n\nThe maximum limit referred to is the accumulation of transactions in a day. For example, if the maximum daily limit specified is Rp 1,000,000, then members are free to make transactions any number of times a day as long as the total transaction value does not exceed Rp 1,000,000.\n\nThis limit includes outside transactions, and also moving money from the Shared Pocket to the member's own Pocket.\n\nTo change the limit of a member, follow these steps:\n\n1. In your Shared Pocket Details page, tap the icon with your member's profile picture.\n2. Tap one of the Can Spend members you wish to change.\n3. Tap Transaction limit.\n4. Set up the daily transaction limit for this member.\n5. Tap Change Limit to save."
+    "content": "Setting Up Can Spend Limit. Shared Pocket Owner can set Can Spend role for its members. For invited members, the maximum limit per day that can be used is Rp 10,000,000. The maximum limit referred to is the accumulation of transactions in a day. For example, if the maximum daily limit specified is Rp 1,000,000, then members are free to make transactions any number of times a day as long as the total transaction value does not exceed Rp 1,000,000. This limit includes outside transactions, and also moving money from the Shared Pocket to the member's own Pocket. To change the limit of a member, follow these steps: 1. In your Shared Pocket Details page, tap the icon with your member's profile picture. 2. Tap one of the Can Spend members you wish to change. 3. Tap Transaction limit. 4. Set up the daily transaction limit for this member. 5. Tap Change Limit to save."
   },
   {
     "role": "system",
-    "content": "Leaving a Shared Pocket\nWhen a member leaves or removed from a Shared Pocket, his/her contribution will be moved under the Others category. It is up to the Owner to give a refund to the leaving member or not.\n\nWhen a Pocket has a target, the target will be recalculated to the rest of the members."
+    "content": "Leaving a Shared Pocket. When a member leaves or removed from a Shared Pocket, his/her contribution will be moved under the Others category. It is up to the Owner to give a refund to the leaving member or not. When a Pocket has a target, the target will be recalculated to the rest of the members."
   },
   {
     "role": "system",
-    "content": "Risks of Shared Pockets\n1. The changes in the interest rate follow the market trend.\n2. Savings will not being covered by LPS if:\n2.1 The accumulated savings amount (including interest) at one bank exceeds Rp 2 billion; and/or\n2.2 The applicable interest rate exceeds the LPS-guaranteed interest rate (click here for further information).\n3. A savings account will potentially be considered dormant in the absence of any transactions for 18 consecutive months.\n4. The risk of improper use of the collective funds in the Shared Pocket by the Pocket Owner because the Pocket Owner is the legal owner entitled to all the collected funds in the Shared Pocket."
+    "content": "Risks of Shared Pockets. 1. The changes in the interest rate follow the market trend. 2. Savings will not being covered by LPS if:. 2.1 The accumulated savings amount (including interest) at one bank exceeds Rp 2 billion; and/or. 2.2 The applicable interest rate exceeds the LPS-guaranteed interest rate (click here for further information). 3. A savings account will potentially be considered dormant in the absence of any transactions for 18 consecutive months. 4. The risk of improper use of the collective funds in the Shared Pocket by the Pocket Owner because the Pocket Owner is the legal owner entitled to all the collected funds in the Shared Pocket."
   },
   {
     "role": "system",
-    "content": "About Pocket\nA Pocket (Kantong in Indonesian) is where you put your money in Jago. It allows you to separate your money into multiple Pockets based on your needs. Personalised it by giving your pockets any name you’d like, upload a photo or use emojis, and use your favorite color as the background.\n\nYou can set up your Pocket for different puRp oses. To ease your daily transactions, choose Spending Pocket where you can attach a Visa debit card to it and use it for e-commerce shopping or withdraw in any ATMs around the globe. To motivate you on your life goals, choose Savings Pocket and you can set up a target to see your saving progress and visualised how close you are to your goal; on top of that you can also activate autosave function that will top-up the savings for you.\n\nBut why stop there? Invite your family, significant others, and your friends to collaborate and save together with you! For all those plans, trips or household chores, you can now create a Shared Pocket to manage the money together. Check out Shared Pocket page to learn more about its awesome features!\n\nTip: You are limited to 20 Savings Pockets and 20 Spending Pockets, you can add, remove, and change its puRp ose anytime you want."
+    "content": "About Pocket. A Pocket (Kantong in Indonesian) is where you put your money in Jago. It allows you to separate your money into multiple Pockets based on your needs. Personalised it by giving your pockets any name you’d like, upload a photo or use emojis, and use your favorite color as the background. You can set up your Pocket for different puRp oses. To ease your daily transactions, choose Spending Pocket where you can attach a Visa debit card to it and use it for e-commerce shopping or withdraw in any ATMs around the globe. To motivate you on your life goals, choose Savings Pocket and you can set up a target to see your saving progress and visualised how close you are to your goal; on top of that you can also activate autosave function that will top-up the savings for you. But why stop there? Invite your family, significant others, and your friends to collaborate and save together with you! For all those plans, trips or household chores, you can now create a Shared Pocket to manage the money together. Check out Shared Pocket page to learn more about its awesome features! Tip: You are limited to 20 Savings Pockets and 20 Spending Pockets, you can add, remove, and change its puRp ose anytime you want."
   },
   {
     "role": "system",
-    "content": "Adding New Pockets\n\nAdding a new Pocket can be done directly from your Pockets landing screen.\n\n1. In your Pockets tab, tap the Add Pocket button.\n2. Choose the Pocket template to suit your financial needs.\n3. Give your Pocket a name, and set the background color and picture.\n4. Choose between creating a Pocket for saving or spending.\n5. Tap the Create Pocket button and you're done!\"\n\nPersonalizing Pockets\n\nEditing an existing Pocket can be done through your Pocket Details page.\n1. On your Pockets tab, choose the Pocket you wish to edit.\n2. Find and tap the 3 dots button on the upper-right corner of your screen\n3. Select Personalize Pocket.\n4. Make changes to your Pocket details.\n5. Tap Save to finish editing.\n \nClosing Pockets\n\nBy closing your Pocket before the 28th, you acknowledge that you are forfeiting the deleted pocket interest.\n1. On your Pockets tab, choose the Pocket you wish to delete.\n2. Find and tap the 3 dots button on the upper-right corner of your screen\n3. Select Close Pocket\n4. Tap Close Now to confirm your action\n\nTip: Closing the Pocket will delete all transaction history happening inside those Pocket.\n\nTip: Closing your Pocket requires you to stop any active target happening inside the Pocket.\n\nAs of December 8, 2021, Pockets can only be closed any day between 01:01 - 23:59 (Western Indonesian Time)"
+    "content": "Adding New Pockets Adding a new Pocket can be done directly from your Pockets landing screen. 1. In your Pockets tab, tap the Add Pocket button. 2. Choose the Pocket template to suit your financial needs. 3. Give your Pocket a name, and set the background color and picture. 4. Choose between creating a Pocket for saving or spending. 5. Tap the Create Pocket button and you're done!\" Personalizing Pockets Editing an existing Pocket can be done through your Pocket Details page. 1. On your Pockets tab, choose the Pocket you wish to edit. 2. Find and tap the 3 dots button on the upper-right corner of your screen. 3. Select Personalize Pocket. 4. Make changes to your Pocket details. 5. Tap Save to finish editing.  . Closing Pockets By closing your Pocket before the 28th, you acknowledge that you are forfeiting the deleted pocket interest. 1. On your Pockets tab, choose the Pocket you wish to delete. 2. Find and tap the 3 dots button on the upper-right corner of your screen. 3. Select Close Pocket. 4. Tap Close Now to confirm your action Tip: Closing the Pocket will delete all transaction history happening inside those Pocket. Tip: Closing your Pocket requires you to stop any active target happening inside the Pocket. As of December 8, 2021, Pockets can only be closed any day between 01:01 - 23:59 (Western Indonesian Time)"
   },
   {
     "role": "system",
-    "content": "How Do I Add Money To a Pocket\n\nYou can add money to your Pocket from another Pocket or your Main Account directly from your Pocket Details page.\n\n1. On your Pockets tab, choose the Pocket you wish to add money in\n2. Tap on the Add Money button\n3. Type in how much money you want to add and select the Pocket source\n4. Tap Add Money to finalize\n\nSpend Money From Pockets\n\nYou can spend your money or transfer it to another bank account directly from your Pocket Details page. Please note, you can only spend money if your Pocket is a Spending Pocket.\n\n1. On your Pockets tab, choose the Pocket you wish to spend from\n2. Tap the Transfer & Pay button\n3. Choose the intended destination\n4. Input the amount of money to pay/send\n5. After confirming your number, tap Send Now."
+    "content": "How Do I Add Money To a Pocket You can add money to your Pocket from another Pocket or your Main Account directly from your Pocket Details page. 1. On your Pockets tab, choose the Pocket you wish to add money in. 2. Tap on the Add Money button. 3. Type in how much money you want to add and select the Pocket source. 4. Tap Add Money to finalize Spend Money From Pockets You can spend your money or transfer it to another bank account directly from your Pocket Details page. Please note, you can only spend money if your Pocket is a Spending Pocket. 1. On your Pockets tab, choose the Pocket you wish to spend from. 2. Tap the Transfer & Pay button. 3. Choose the intended destination. 4. Input the amount of money to pay/send. 5. After confirming your number, tap Send Now."
   },
   {
     "role": "system",
-    "content": "Transfer & Pay feature of bank jago\n\nChoose the appropriate Pocket as a source of funds to manage expenses better. To make it easier to manage spending, choose the right expense category for each transaction. Send proof of transaction directly from the Jago application after completing a bill payment or money transfer transaction."
+    "content": "Transfer & Pay feature of bank jago Choose the appropriate Pocket as a source of funds to manage expenses better. To make it easier to manage spending, choose the right expense category for each transaction. Send proof of transaction directly from the Jago application after completing a bill payment or money transfer transaction."
   },
   {
     "role": "system",
-    "content": "bank jago interest rates\n\nMain Pocket is 3.75% p.a if customer linked jago account to bibit or gojek, otherwise it's 0.5% p.a. \nSpending Pocket is 3.75% p.a if customer linked jago account to bibit or gojek, otherwise it's 0.5% p.a.\nSavings Pocket is 3.75% p.a if customer linked jago account to bibit or gojek, otherwise it's 3.75% p.a.\nLocked Pocket is 4.75%\nInvestment Pocket (RDN) is 2.00% p.a. \nTerm Deposit is 5% p.a.\nGoPay Tabungan by Jago is 2.5% p.a."
+    "content": "bank jago interest rates Main Pocket is 3.75% p.a if customer linked jago account to bibit or gojek, otherwise it's 0.5% p.a. Spending Pocket is 3.75% p.a if customer linked jago account to bibit or gojek, otherwise it's 0.5% p.a. Savings Pocket is 3.75% p.a if customer linked jago account to bibit or gojek, otherwise it's 3.75% p.a. Locked Pocket is 4.75%. Investment Pocket (RDN) is 2.00% p.a. Term Deposit is 5% p.a. GoPay Tabungan by Jago is 2.5% p.a."
   },
   {
     "role": "system",
-    "content": "bank jago fee rates\n\nAccount opening fee is Free\nMonthly administration fee is Free\nThe initial balance when opening an account is Free\nDormant account fee (no transaction during 18 months is Free."
+    "content": "bank jago fee rates Account opening fee is Free. Monthly administration fee is Free. The initial balance when opening an account is Free. Dormant account fee (no transaction during 18 months is Free."
   },
   {
     "role": "system",
-    "content": "bank jago fee on transaction\n\nSend money to Jago / Jago Syariah is Free\nSend money to other banks using RTOL or BI-FAST is depends maximum 150x free / month depends on customer level\n\nRTOL is Rp 2,500/transaction after the free quota runs out\nBI-FAST is Rp 2,500/transaction after the free quota runs out\nSend money using SKN is Rp 2,900/transaction\nSend money using RTGS is Rp 25,000."
+    "content": "bank jago fee on transaction Send money to Jago / Jago Syariah is Free. Send money to other banks using RTOL or BI-FAST is depends maximum 150x free / month depends on customer level RTOL is Rp 2,500/transaction after the free quota runs out. BI-FAST is Rp 2,500/transaction after the free quota runs out. Send money using SKN is Rp 2,900/transaction. Send money using RTGS is Rp 25,000."
   },
   {
     "role": "system",
-    "content": "The cost charged by central bank (Bank Indonesia) to the Bank on transaction\n\nSKN Transaction is Rp 1\nRTGS Transaction 06.30 – 10.00 WIB is Rp 6,000\nRTGS Transaction 10.01 – 14.00 WIB is Rp 15,000\nRTGS Transaction 14.01 – cut off time WIB is Rp 21,000\nBI-FAST Transaction is Rp 19."
+    "content": "The cost charged by central bank (Bank Indonesia) to the Bank on transaction SKN Transaction is Rp 1. RTGS Transaction 06.30 – 10.00 WIB is Rp 6,000. RTGS Transaction 10.01 – 14.00 WIB is Rp 15,000. RTGS Transaction 14.01 – cut off time WIB is Rp 21,000. BI-FAST Transaction is Rp 19."
   },
   {
     "role": "system",
-    "content": "transaction fee to pay bills in bank jago\n\nMobile data purchase is Rp 1,500\nMobile top up fee is Rp 1,500\nTelkom (Indihome) is Rp 3,000\nBiznet is Rp 4,000\nTransvision is Rp 5,000\nPLN Token is Rp 2,750\nPLN Postpaid is Rp 2,000\nPDAM Bogor City is Rp 2,500\nPDAM Depok City is Rp 2,500\nPDAM Bekasi District is Rp 2,500\nPDAM Jakarta Aerta is Rp 2,500\nPDAM Jakarta Palyja is Rp 2,500."
+    "content": "transaction fee to pay bills in bank jago Mobile data purchase is Rp 1,500. Mobile top up fee is Rp 1,500. Telkom (Indihome) is Rp 3,000. Biznet is Rp 4,000. Transvision is Rp 5,000. PLN Token is Rp 2,750. PLN Postpaid is Rp 2,000. PDAM Bogor City is Rp 2,500. PDAM Depok City is Rp 2,500. PDAM Bekasi District is Rp 2,500. PDAM Jakarta Aerta is Rp 2,500. PDAM Jakarta Palyja is Rp 2,500."
   },
   {
     "role": "system",
-    "content": "Fee on Top Up e-Wallet from Jago App\nGOPAY top-up is Free\nOVO top-up is Max. 150x free e-Wallet Top Ups/month (depending on your Account Level) After the quota runs out: Rp 2,500/transaction."
+    "content": "Fee on Top Up e-Wallet from Jago App. GOPAY top-up is Free. OVO top-up is Max. 150x free e-Wallet Top Ups/month (depending on your Account Level) After the quota runs out: Rp 2,500/transaction."
   }
 ]
