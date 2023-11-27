@@ -2,7 +2,7 @@ const axios = require('axios');
 const fs = require('fs');
 const Telegram = require('node-telegram-bot-api');
 const { getCollection } = require('./db'); 
-const { VECTOR_COLLECTION_NAME } = require('./constants'); 
+const { VECTOR_COLLECTION_NAME, TELEGRAM_INLINE_BUTTON_ACTION } = require('./constants'); 
 
 const credentials = require('./creds');
 
@@ -65,16 +65,14 @@ const processAdmin = (messageInfo) => {
   fs.writeFileSync(config.knowledgeFileName, JSON.stringify(dataArray, null, 2));
 }
 
-const processCustomer = async (messageInfo) => {
-  const message = messageInfo.text
-
-  const context = await getPreContext(message);
+const getTextCompletion = async (query) => {
+  const context = await getPreContext(query);
 
   // Construct the request payload
   const payload = {
     messages: [
       ...context,
-      { "role": "user", "content": message }
+      { "role": "user", "content": query }
     ],
     temperature: 0.7,
     max_tokens: -1,
@@ -100,8 +98,12 @@ const processCustomer = async (messageInfo) => {
     return;
   }
 
+  return response.data.choices[0].message.content;
+}
 
-  const generatedText = response.data.choices[0].message.content;
+const processCustomer = async (query, messageInfo) => {
+  const generatedText = await getTextCompletion(query)
+
   await bot.sendMessage(messageInfo.chat.id, generatedText);
 }
 
@@ -209,14 +211,26 @@ const processMessage = async (messageInfo) => {
     return;
   }
 
-  await processCustomer(messageInfo)
+  await processCustomer(messageInfo.text, messageInfo)
   return;
 }
+
+const buttons = [
+  [
+    { text: "I'm Jago User", callback_data: TELEGRAM_INLINE_BUTTON_ACTION.USER_START },
+    { text: "I'm Admin", callback_data: TELEGRAM_INLINE_BUTTON_ACTION.ADMIN_START }
+  ]
+];
+
+const inlineKeyboardMarkup = {
+  inline_keyboard: buttons
+};
 
 bot.on('message', async function (messageInfo) {
   const message = messageInfo.text
 
   if (message === '/start') {
+    await bot.sendMessage(messageInfo.chat.id, 'Hi :)', {reply_markup: inlineKeyboardMarkup});
     return;
   }
 
@@ -226,3 +240,21 @@ bot.on('message', async function (messageInfo) {
 bot.on('polling_error', (error) => {
   console.log(error)
 })
+
+bot.on('callback_query', async (callbackQuery) => {
+  const callbackData = callbackQuery.data;
+
+  if (callbackData === TELEGRAM_INLINE_BUTTON_ACTION.USER_START) {
+    await processCustomer('Hi, Tanya Jago?', callbackQuery.message);
+    await bot.deleteMessage(callbackQuery.message.chat.id, callbackQuery.message.message_id);
+    return;
+  }
+
+  if (callbackData === TELEGRAM_INLINE_BUTTON_ACTION.ADMIN_START) {
+    await bot.sendMessage(callbackQuery.message.chat.id, 'hi veeda, coming soon ...');
+    await bot.deleteMessage(callbackQuery.message.chat.id, callbackQuery.message.message_id);
+    return;
+  }
+
+  bot.answerCallbackQuery(callbackQuery.id);
+});
