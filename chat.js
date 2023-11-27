@@ -16,7 +16,7 @@ const config = {
   baseUrl: "http://192.168.68.120:1234",
   timeout: 600000,
   isStream: process.env.isStream === 'true' || false,
-  isOffline: false
+  isOffline: true
 }
 
 const getContext = async (query) => {
@@ -193,6 +193,7 @@ const processMessage = async (messageInfo) => {
   const message = messageInfo.text;
   if (config.isOffline){
     await bot.sendMessage(messageInfo.chat.id, 'bot is offline. comeback later ehehe ...');
+    return;
   }
 
   if (config.isAdminOnly) {
