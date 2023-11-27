@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env npm run remap && node chat.js",
+    "start": "cross-env npm run remap && isStream=false node chat.js",
     "start:admin": "cross-env npm run remap && isAdminMode=true node chat.js",
     "remap": "cross-env node remapped.js",
     "test": "echo \"Error: no test specified\" && exit 1"
