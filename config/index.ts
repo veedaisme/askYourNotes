@@ -3,7 +3,7 @@ const configParameter = {
   knowledgeFileName: 'baseKnowledge/raw.json',
   flattenKnowledgeFileName: 'baseKnowledge/flatten.json',
   // baseUrl: "https://chat.hooman.live",
-  baseUrl: "http://192.168.68.120:1234",
+  llmBaseUrl: "http://192.168.68.120:1234",
   timeout: 600000,
   isOffline: false
 }

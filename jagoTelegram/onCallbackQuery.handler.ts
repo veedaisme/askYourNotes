@@ -1,6 +1,6 @@
 import { ChatId } from "node-telegram-bot-api";
 
-import telegramClient from "./client";
+import telegramClient from "./jagoTelegram.client";
 import { TELEGRAM_INLINE_BUTTON_ACTION } from "../constants";
 
 telegramClient.on('callback_query', async (callbackQuery) => {

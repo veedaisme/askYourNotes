@@ -1,6 +1,58 @@
 import config from "../config";
-import { TELEGRAM_INLINE_BUTTON_ACTION } from "../constants";
-import telegramClient from "./client";
+import telegramClient from "./jagoTelegram.client";
+import vectorDb from '../vectorDb/collection';
+import { IncludeEnum } from "chromadb";
+import TelegramBot from "node-telegram-bot-api";
+import { VECTOR_COLLECTION_NAME, TELEGRAM_INLINE_BUTTON_ACTION, CHAT_ROLE } from '../constants';
+import UserQuery from "../model/UserQuery";
+import HuggingFaceClient from "../llm/huggingFace/huggingFace.client";
+
+// TODO(fakhri): move vektor db to class if needed
+const getContext = async (query: string) => {
+  const collection = await vectorDb.getCollection(VECTOR_COLLECTION_NAME.JAGO);
+
+  const results = await collection.query({
+    nResults: 5,
+    queryTexts: [query],
+    include: [IncludeEnum.Documents]
+  });
+
+  const context = results.documents[0].join(' ');
+
+  return {
+    role: 'system',
+    content: context
+  }
+}
+
+const getPreContext = async (query: string) => {
+  const queryBasedContext = await getContext(query);
+
+  const systemPrompt = [
+    {
+      role: CHAT_ROLE.SYSTEM,
+      content: queryBasedContext.content
+    },
+  ];
+
+  return systemPrompt;
+}
+
+const processMessage = async (query: string, messageInfo: TelegramBot.Message) => {
+  const username = messageInfo.chat.username;
+
+  const userQuery = new UserQuery(query);
+
+  // let context = await getPreContext(query);
+
+  // const prompt = [...context, currentQuery]
+
+  const llmProcessor = new HuggingFaceClient(config.llmBaseUrl);
+
+  const generatedText = await llmProcessor.setUserQuery(userQuery).exec();
+
+  await telegramClient.sendMessage(messageInfo.chat.id, generatedText);
+}
 
 const buttons = [
   [
@@ -14,7 +66,8 @@ const inlineKeyboardMarkup = {
 };
 
 telegramClient.on('message', async function (messageInfo) {
-  const message = messageInfo.text
+  const message = messageInfo.text as string;
+  
   if (config.isOffline) {
     await telegramClient.sendMessage(messageInfo.chat.id, 'bot is offline. comeback later ehehe ...');
     return;
@@ -25,6 +78,6 @@ telegramClient.on('message', async function (messageInfo) {
     return;
   }
 
-  // TODO(fakhri): update handler on message
-  // await processMessage(messageInfo);
+  await processMessage(message, messageInfo);
 });
+

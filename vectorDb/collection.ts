@@ -28,8 +28,10 @@ const deleteCollection = (vectorCollectionName: VECTOR_COLLECTION_NAME) => {
   });
 }
 
-module.exports = {
+const vectorDb = {
   getCollection,
   createCollection,
   deleteCollection
 }
+
+export default vectorDb;
