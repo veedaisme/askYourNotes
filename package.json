@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env isStream=false node chat.js",
+    "start": "cross-env isStream=false node dist/jagoTelegram",
+    "start:dev": "cross-env isStream=false ts-node jagoTelegram",
     "start:admin": "cross-env isAdminMode=true node chat.js",
     "remap": "cross-env node remapped.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,10 +18,12 @@
     "cross-env": "^7.0.3",
     "node-fetch": "^3.3.2",
     "node-telegram-bot-api": "^0.64.0",
-    "openai": "^4.20.0",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "eslint": "^8.54.0"
+    "@types/node-telegram-bot-api": "^0.63.3",
+    "eslint": "^8.54.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.2"
   }
 }
