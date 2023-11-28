@@ -1,9 +1,9 @@
 import axios from "axios";
 import UserQuery from "../../model/UserQuery";
-import { BaseLLMProcessor } from "../../model/model.interface";
 import SystemQuery from '../../model/SystemQuery';
+import IBaseLLMProcessor from "../../model/IBaseLLMProcessor";
 
-class HuggingFaceClient extends BaseLLMProcessor {
+class HuggingFaceClient extends IBaseLLMProcessor {
   static completionPath = '/v1/chat/completions';
   static timeout = 60000;
 

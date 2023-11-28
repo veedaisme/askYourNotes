@@ -1,10 +1,11 @@
 import { CHAT_ROLE } from "../constants";
-import { IChatQuery, IQuery } from "./model.interface";
+import IQuery from "./IQuery";
+import { IChatQuery } from "./model.interface";
 
 class SystemQuery extends IQuery {
   static defaultSystemQuery = 'You are a helpful assistant.';
 
-  constructor(query: string = SystemQuery.defaultSystemQuery) {
+  constructor(query: string) {
     super(query);
   }
 

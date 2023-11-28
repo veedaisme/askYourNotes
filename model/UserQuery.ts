@@ -1,5 +1,6 @@
 import { CHAT_ROLE } from "../constants";
-import { IChatQuery, IQuery } from "./model.interface";
+import IQuery from "./IQuery";
+import { IChatQuery } from "./model.interface";
 
 class UserQuery extends IQuery {
 
