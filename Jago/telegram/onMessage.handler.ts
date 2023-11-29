@@ -1,7 +1,7 @@
 import config from "../../config";
 import telegramClient from "./jagoTelegram.client";
 import TelegramBot from "node-telegram-bot-api";
-import { TELEGRAM_INLINE_BUTTON_ACTION, CHAT_ROLE } from '../../constants';
+import { JAGO_INLINE_BUTTON_ACTION } from '../constants';
 import UserQuery from "../../model/UserQuery";
 import HuggingFaceClient from "../../llm/huggingFace/huggingFace.client";
 import SystemQuery from "../../model/SystemQuery";
@@ -25,8 +25,8 @@ export const processMessage = async (query: string, messageInfo: TelegramBot.Mes
 
 const buttons = [
   [
-    { text: "I'm Jago User", callback_data: TELEGRAM_INLINE_BUTTON_ACTION.USER_START },
-    { text: "I'm Admin", callback_data: TELEGRAM_INLINE_BUTTON_ACTION.ADMIN_START }
+    { text: "I'm Jago User", callback_data: JAGO_INLINE_BUTTON_ACTION.USER_START },
+    { text: "I'm Admin", callback_data: JAGO_INLINE_BUTTON_ACTION.ADMIN_START }
   ]
 ];
 

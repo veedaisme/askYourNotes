@@ -1,6 +1,6 @@
 import config from "../../config";
 import telegramClient from "./smartNotesTelegram.client";
-import { TELEGRAM_INLINE_BUTTON_ACTION } from '../../constants';
+import { NOTES_INLINE_BUTTON_ACTION } from '../constants';
 
 // export const processMessage = async (query: string, messageInfo: TelegramBot.Message) => {
 //   // const username = messageInfo.chat.username;
@@ -20,8 +20,7 @@ import { TELEGRAM_INLINE_BUTTON_ACTION } from '../../constants';
 
 const buttons = [
   [
-    { text: "I'm Jago User", callback_data: TELEGRAM_INLINE_BUTTON_ACTION.USER_START },
-    { text: "I'm Admin", callback_data: TELEGRAM_INLINE_BUTTON_ACTION.ADMIN_START }
+    { text: "📝 Add notes", callback_data: NOTES_INLINE_BUTTON_ACTION.ADD_NOTES },
   ]
 ];
 
