@@ -1,15 +1,15 @@
 import config from "../config";
 import telegramClient from "./jagoTelegram.client";
-import vectorDb from '../vectorDb/collection';
 import { IncludeEnum } from "chromadb";
 import TelegramBot from "node-telegram-bot-api";
 import { VECTOR_COLLECTION_NAME, TELEGRAM_INLINE_BUTTON_ACTION, CHAT_ROLE } from '../constants';
 import UserQuery from "../model/UserQuery";
 import HuggingFaceClient from "../llm/huggingFace/huggingFace.client";
+import vectorDbClient from "../vectorDb";
 
 // TODO(fakhri): move vektor db to class if needed
 const getContext = async (query: string) => {
-  const collection = await vectorDb.getCollection(VECTOR_COLLECTION_NAME.JAGO);
+  const collection = await vectorDbClient.collection(VECTOR_COLLECTION_NAME.JAGO);
 
   const results = await collection.query({
     nResults: 5,
@@ -67,7 +67,7 @@ const inlineKeyboardMarkup = {
 
 telegramClient.on('message', async function (messageInfo) {
   const message = messageInfo.text as string;
-  
+
   if (config.isOffline) {
     await telegramClient.sendMessage(messageInfo.chat.id, 'bot is offline. comeback later ehehe ...');
     return;
