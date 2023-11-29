@@ -1,14 +1,15 @@
-import { ChatId } from "node-telegram-bot-api";
+import TelegramBot, { ChatId } from "node-telegram-bot-api";
 
 import telegramClient from "./jagoTelegram.client";
 import { TELEGRAM_INLINE_BUTTON_ACTION } from "../constants";
+import { processMessage } from "./onMessage.handler";
 
 telegramClient.on('callback_query', async (callbackQuery) => {
   const callbackData = callbackQuery.data;
 
   if (callbackData === TELEGRAM_INLINE_BUTTON_ACTION.USER_START) {
     // TODO(fakhri): update handler on message
-    // await processCustomer('Hi, Tanya Jago?', callbackQuery.message);
+    await processMessage('Hi, Tanya Jago?', callbackQuery.message as TelegramBot.Message);
     await telegramClient.deleteMessage(callbackQuery.message?.chat.id as ChatId, callbackQuery.message?.message_id as number);
     return;
   }
