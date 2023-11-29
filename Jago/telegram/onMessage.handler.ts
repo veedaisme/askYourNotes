@@ -1,11 +1,11 @@
-import config from "../config";
+import config from "../../config";
 import telegramClient from "./jagoTelegram.client";
 import TelegramBot from "node-telegram-bot-api";
-import { TELEGRAM_INLINE_BUTTON_ACTION, CHAT_ROLE } from '../constants';
-import UserQuery from "../model/UserQuery";
-import HuggingFaceClient from "../llm/huggingFace/huggingFace.client";
-import SystemQuery from "../model/SystemQuery";
-import JagoContextService from "../Jago/JagoContext.service";
+import { TELEGRAM_INLINE_BUTTON_ACTION, CHAT_ROLE } from '../../constants';
+import UserQuery from "../../model/UserQuery";
+import HuggingFaceClient from "../../llm/huggingFace/huggingFace.client";
+import SystemQuery from "../../model/SystemQuery";
+import JagoContextService from "../JagoContext.service";
 
 export const processMessage = async (query: string, messageInfo: TelegramBot.Message) => {
   // const username = messageInfo.chat.username;

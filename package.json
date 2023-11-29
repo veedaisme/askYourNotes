@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env isStream=false node dist/jagoTelegram",
-    "start:dev": "cross-env isStream=false ts-node jagoTelegram",
+    "start:dev:jago": "cross-env isStream=false ts-node jago",
+    "start:dev:notes": "cross-env isStream=false ts-node smartNotes",
     "start:admin": "cross-env isAdminMode=true node chat.js",
     "remap": "cross-env node remapped.js",
     "test": "echo \"Error: no test specified\" && exit 1"
