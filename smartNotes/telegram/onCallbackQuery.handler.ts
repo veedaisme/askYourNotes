@@ -6,7 +6,7 @@ import SmartNotesService from "../SmartNotes.service";
 
 const smartNoteService = new SmartNotesService();
 
-const handleReply = async (message: TelegramBot.Message) => {
+const handleReplyCreateNote = async (message: TelegramBot.Message) => {
   const note = message.text;
   const username = message.chat.username as string;
 
@@ -27,12 +27,28 @@ const handleReply = async (message: TelegramBot.Message) => {
   await telegramClient.sendMessage(message?.chat.id as ChatId, 'Saved 😊');
 }
 
+const handleReplyAskNote = async (message: TelegramBot.Message) => {
+  const question = message.text;
+  const username = message.chat.username as string;
+
+  if (!question){
+    return;
+  }
+
+  await telegramClient.sendChatAction(message?.chat.id as ChatId, 'typing');
+  
+  const relevantInformation = await smartNoteService.askNote(question, {
+    identifier: username,
+    source: 'telegram'
+  });
+
+  await telegramClient.sendMessage(message?.chat.id as ChatId, relevantInformation);
+}
+
 telegramClient.on('callback_query', async (callbackQuery) => {
   const callbackData = callbackQuery.data;
 
   if (callbackData === NOTES_INLINE_BUTTON_ACTION.ADD_NOTES) {
-    const messageId = callbackQuery.message?.message_id as number;
-
     const inputNoteMesage = await telegramClient.sendMessage(callbackQuery.message?.chat.id as ChatId, 'what do you have in mind ?', {
       reply_markup: {
         force_reply: true,
@@ -40,18 +56,25 @@ telegramClient.on('callback_query', async (callbackQuery) => {
       },
     });
 
-    telegramClient.onReplyToMessage(inputNoteMesage.chat.id, inputNoteMesage.message_id, handleReply);
+    telegramClient.onReplyToMessage(inputNoteMesage.chat.id, inputNoteMesage.message_id, handleReplyCreateNote);
 
     await telegramClient.answerCallbackQuery(callbackQuery.id);
     
     return;
   }
 
-  // if (callbackData === NOTES_INLINE_BUTTON_ACTION.ADMIN_START) {
-  //   await telegramClient.sendMessage(callbackQuery.message?.chat.id as ChatId, 'hi veeda, coming soon ...');
-  //   await telegramClient.deleteMessage(callbackQuery.message?.chat.id as ChatId, callbackQuery.message?.message_id as number);
-  //   return;
-  // }
+  if (callbackData === NOTES_INLINE_BUTTON_ACTION.ASK_NOTES) {
+    const inputNoteMesage = await telegramClient.sendMessage(callbackQuery.message?.chat.id as ChatId, 'what do you want to ask ?', {
+      reply_markup: {
+        force_reply: true,
+        input_field_placeholder: "ask me anything about your notes",
+      },
+    });
 
-  telegramClient.answerCallbackQuery(callbackQuery.id);
+    telegramClient.onReplyToMessage(inputNoteMesage.chat.id, inputNoteMesage.message_id, handleReplyAskNote);
+
+    await telegramClient.answerCallbackQuery(callbackQuery.id);
+  
+    return;
+  }
 });

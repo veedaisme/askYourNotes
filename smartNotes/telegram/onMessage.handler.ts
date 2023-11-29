@@ -21,6 +21,7 @@ import { NOTES_INLINE_BUTTON_ACTION } from '../constants';
 const buttons = [
   [
     { text: "📝 Add notes", callback_data: NOTES_INLINE_BUTTON_ACTION.ADD_NOTES },
+    { text: "💬 ask your notes", callback_data: NOTES_INLINE_BUTTON_ACTION.ASK_NOTES },
   ]
 ];
 

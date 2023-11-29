@@ -1,5 +1,6 @@
 import { VECTOR_COLLECTION_NAME } from "../constants";
 import IContextService from "../model/IContextService";
+import { Metadata } from "../vectorDb/vectorDb.interface";
 import { IMetadataInput } from "./smartNotes.interface";
 
 
@@ -15,13 +16,19 @@ class SmartNotesContext extends IContextService {
   }
 
   async addReference(document: string, metadataInput: IMetadataInput): Promise<void> {
-    const { identifier, source = 'telegram' } = metadataInput 
+    const { identifier, source } = metadataInput 
 
-    const metadata = {
-      identifier: identifier,
+    const metadata: Metadata = {
       context: this.metadataConstant.context,
       type: this.metadataConstant.type,
-      source: source
+    }
+
+    if (identifier) {
+      metadata.identifier = identifier
+    }
+
+    if (source) {
+      metadata.source = source
     }
 
     await this.addReferences([document], metadata);
