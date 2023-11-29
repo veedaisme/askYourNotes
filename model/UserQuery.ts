@@ -6,6 +6,8 @@ class UserQuery extends IQuery {
 
   constructor(query: string) {
     super(query);
+
+    return this;
   }
 
   toPrompt(): IChatQuery {
@@ -13,6 +15,18 @@ class UserQuery extends IQuery {
       role: CHAT_ROLE.USER,
       content: this.query
     };
+  }
+
+  withContext(context: string) {
+    const queryWithContext = `
+      """ ${context} """
+
+      sentence: ${this.query}
+    `;
+
+    this.query = queryWithContext;
+
+    return this;
   }
 }
 

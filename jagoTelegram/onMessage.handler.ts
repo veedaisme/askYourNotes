@@ -1,55 +1,24 @@
 import config from "../config";
 import telegramClient from "./jagoTelegram.client";
-import { IncludeEnum } from "chromadb";
 import TelegramBot from "node-telegram-bot-api";
-import { VECTOR_COLLECTION_NAME, TELEGRAM_INLINE_BUTTON_ACTION, CHAT_ROLE } from '../constants';
+import { TELEGRAM_INLINE_BUTTON_ACTION, CHAT_ROLE } from '../constants';
 import UserQuery from "../model/UserQuery";
 import HuggingFaceClient from "../llm/huggingFace/huggingFace.client";
-import vectorDbClient from "../vectorDb";
-
-// TODO(fakhri): move vektor db to class if needed
-const getContext = async (query: string) => {
-  const collection = await vectorDbClient.collection(VECTOR_COLLECTION_NAME.JAGO);
-
-  const results = await collection.query({
-    nResults: 5,
-    queryTexts: [query],
-    include: [IncludeEnum.Documents]
-  });
-
-  const context = results.documents[0].join(' ');
-
-  return {
-    role: 'system',
-    content: context
-  }
-}
-
-const getPreContext = async (query: string) => {
-  const queryBasedContext = await getContext(query);
-
-  const systemPrompt = [
-    {
-      role: CHAT_ROLE.SYSTEM,
-      content: queryBasedContext.content
-    },
-  ];
-
-  return systemPrompt;
-}
+import JagoContextService from "../Jago/jagoContext.service";
+import SystemQuery from "../model/SystemQuery";
 
 const processMessage = async (query: string, messageInfo: TelegramBot.Message) => {
-  const username = messageInfo.chat.username;
+  // const username = messageInfo.chat.username;
 
-  const userQuery = new UserQuery(query);
+  const context = await new JagoContextService().query(query);
 
-  // let context = await getPreContext(query);
+  const userQuery = new UserQuery(query).withContext(context);
 
-  // const prompt = [...context, currentQuery]
+  const systemQuery = new SystemQuery('Use the provided documents delimited by triple quotes to answer a sentence from user. If the answer cannot be found in the documents, answer with "I don\'t know." in a polite and formal way');
 
   const llmProcessor = new HuggingFaceClient(config.llmBaseUrl);
 
-  const generatedText = await llmProcessor.setUserQuery(userQuery).exec();
+  const generatedText = await llmProcessor.setSystemQuery(systemQuery).setUserQuery(userQuery).exec();
 
   await telegramClient.sendMessage(messageInfo.chat.id, generatedText);
 }
