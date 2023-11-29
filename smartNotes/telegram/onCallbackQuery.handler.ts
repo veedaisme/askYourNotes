@@ -2,15 +2,27 @@ import TelegramBot, { ChatId } from "node-telegram-bot-api";
 
 import telegramClient from "./smartNotesTelegram.client";
 import { NOTES_INLINE_BUTTON_ACTION } from "../constants";
+import SmartNotesService from "../SmartNotes.service";
+
+const smartNoteService = new SmartNotesService();
 
 const handleReply = async (message: TelegramBot.Message) => {
   const note = message.text;
-  console.log(note);
+  const username = message.chat.username as string;
+
+  if (!note){
+    return;
+  }
+  
+  await smartNoteService.addNote(note, {
+    identifier: username,
+    source: 'telegram'
+  });
 
   const savedMessageMarkdown = `\`\`\` ${note} \`\`\``;
 
   await telegramClient.sendMessage(message?.chat.id as ChatId, savedMessageMarkdown, {
-    parse_mode: 'Markdown'
+    parse_mode: 'MarkdownV2'
   });
   await telegramClient.sendMessage(message?.chat.id as ChatId, 'Saved 😊');
 }
@@ -29,6 +41,9 @@ telegramClient.on('callback_query', async (callbackQuery) => {
     });
 
     telegramClient.onReplyToMessage(inputNoteMesage.chat.id, inputNoteMesage.message_id, handleReply);
+
+    await telegramClient.answerCallbackQuery(callbackQuery.id);
+    
     return;
   }
 

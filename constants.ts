@@ -4,6 +4,8 @@ export enum CHAT_ROLE {
   ASSISTANT = 'assistant'
 }
 
+
 export enum VECTOR_COLLECTION_NAME {
-  JAGO = 'jago'
+  JAGO = 'jago',
+  SMART_NOTES = "smart_notes"
 }

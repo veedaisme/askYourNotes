@@ -3,7 +3,7 @@ import { IVectorDbConfig } from "../model/model.interface";
 import { VECTOR_COLLECTION_NAME } from "../constants";
 
 class VectorDbClient extends ChromaClient {
-  embeddingFunction: OpenAIEmbeddingFunction;
+  private embeddingFunction: OpenAIEmbeddingFunction;
 
   constructor(config: IVectorDbConfig) {
     super();
@@ -28,6 +28,9 @@ class VectorDbClient extends ChromaClient {
     return this.createCollection({
       name: vectorCollectionName,
       embeddingFunction: this.embeddingFunction,
+      metadata: {
+        "hnsw:space": "cosine"
+      }
     });
   }
   

@@ -4,8 +4,8 @@ import SystemQuery from '../../model/SystemQuery';
 import IBaseLLMProcessor from "../../model/IBaseLLMProcessor";
 
 class HuggingFaceClient extends IBaseLLMProcessor {
-  static completionPath = '/v1/chat/completions';
-  static timeout = 60000;
+  private completionPath = '/v1/chat/completions';
+  private timeout = 60000;
 
   setSystemQuery(query: SystemQuery) {
     this.systemQuery = query;
@@ -34,7 +34,7 @@ class HuggingFaceClient extends IBaseLLMProcessor {
       stream: false
     };
   
-    const url = `${this.baseUrl}${HuggingFaceClient.completionPath}`;
+    const url = `${this.baseUrl}${this.completionPath}`;
   
     const headers = {
       "Content-Type": "application/json",
@@ -45,7 +45,7 @@ class HuggingFaceClient extends IBaseLLMProcessor {
     try {
       response = await axios.post(url, payload, {
         headers,
-        timeout: HuggingFaceClient.timeout
+        timeout: this.timeout
       });
     } catch (error) {
       // TODO(fakhri): handle unexpected error from lmstudio huggingface
