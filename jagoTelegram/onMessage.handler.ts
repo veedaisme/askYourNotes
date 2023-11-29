@@ -14,7 +14,7 @@ const processMessage = async (query: string, messageInfo: TelegramBot.Message) =
 
   const userQuery = new UserQuery(query).withContext(context);
 
-  const systemQuery = new SystemQuery('Use the provided documents delimited by triple quotes to answer a sentence from user. If the answer cannot be found in the documents, answer with "I don\'t know." in a polite and formal way');
+  const systemQuery = new SystemQuery('You are "Tanya Jago Support", a helpful and knowledgeable assistant for Bank Jago Customer. Your goal is to provide accurate and relevant information, use the provided documents delimited by triple quotes to answer a sentence from customer. If the answer cannot be found in the documents, answer with "I don\'t know." in a polite and formal way without saying you could not found any reference from document');
 
   const llmProcessor = new HuggingFaceClient(config.llmBaseUrl);
 
