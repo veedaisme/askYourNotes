@@ -34,9 +34,22 @@ class SmartNotesService {
     await this.contextService.addReference(noteWithAdditionalInfo, metadata);
   }
 
+  private async getQueryToContextService(query: string): Promise<string> {
+    const userQuery = new UserQuery(query);
+
+    const systemQuery = new SystemQuery('You are excel at summarizing questions concisely and effectively for querying the vector database');
+
+    const answer = await this.llmProcessor.setSystemQuery(systemQuery).setUserQuery(userQuery).exec();
+
+    return answer;
+  }
+
   async askNote(query: string, metadata: IMetadataInput): Promise<string> {
+    
+    const contextQuery = await this.getQueryToContextService(query);
+    
     // TODO(fakhri): enhance metadata identifier for query to context
-    const context = await this.contextService.query(query, { identifier: metadata.identifier });
+    const context = await this.contextService.query(contextQuery, { identifier: metadata.identifier });
 
     const userQuery = new UserQuery(query).withContext(context);
 
