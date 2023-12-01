@@ -5,21 +5,25 @@ import UserQuery from "./UserQuery";
  * Builder class of llm processor
  */
 abstract class IBaseLLMProcessor {
-  systemQuery: SystemQuery = new SystemQuery(SystemQuery.defaultSystemQuery);
+  protected systemQuery: SystemQuery = new SystemQuery(SystemQuery.defaultSystemQuery);
 
-  userQuery!: UserQuery;
+  protected userQuery!: UserQuery;
 
-  baseUrl: string;
+  protected baseUrl!: string;
 
-  constructor(baseUrl: string) {
-    this.baseUrl = baseUrl;
+  setSystemQuery(query: SystemQuery) {
+    this.systemQuery = query;
+
+    return this;
   }
 
-  abstract setSystemQuery(query: SystemQuery): IBaseLLMProcessor;
+  setUserQuery(query: UserQuery) {
+    this.userQuery = query;
 
-  abstract setUserQuery(query: UserQuery): IBaseLLMProcessor;
+    return this;
+  }
 
-  abstract exec(queryText: UserQuery): Promise<string>;
+  abstract exec(): Promise<string>;
 }
 
 export default IBaseLLMProcessor;

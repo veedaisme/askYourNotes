@@ -16,7 +16,7 @@ export const processMessage = async (query: string, messageInfo: TelegramBot.Mes
 
   const systemQuery = new SystemQuery('You are "Tanya Jago Support", a helpful and knowledgeable assistant for Bank Jago Customer. Your goal is to provide accurate and relevant information, use the provided documents delimited by triple quotes to answer a sentence from customer. If the answer cannot be found in the documents, answer with "I sincerely apologize for any inconvenience caused by my inability to answer your question at this time. I am constantly learning and improving, and I will strive to provide more comprehensive support in the future." without saying you could not found any reference from document');
 
-  const llmProcessor = new HuggingFaceClient(config.llmBaseUrl);
+  const llmProcessor = new HuggingFaceClient();
 
   const generatedText = await llmProcessor.setSystemQuery(systemQuery).setUserQuery(userQuery).exec();
 

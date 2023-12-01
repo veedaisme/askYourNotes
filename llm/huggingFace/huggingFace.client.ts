@@ -1,23 +1,11 @@
 import axios from "axios";
-import UserQuery from "../../model/UserQuery";
-import SystemQuery from '../../model/SystemQuery';
 import IBaseLLMProcessor from "../../model/IBaseLLMProcessor";
+import config from "../../config";
 
 class HuggingFaceClient extends IBaseLLMProcessor {
   private completionPath = '/v1/chat/completions';
   private timeout = 60000;
-
-  setSystemQuery(query: SystemQuery) {
-    this.systemQuery = query;
-
-    return this;
-  }
-
-  setUserQuery(query: UserQuery) {
-    this.userQuery = query;
-
-    return this;
-  }
+  baseUrl = config.llmBaseUrl;
 
   async exec(): Promise<string> {
     if (!this.userQuery) {
