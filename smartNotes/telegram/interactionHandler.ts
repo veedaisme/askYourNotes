@@ -44,7 +44,7 @@ const handleReplyAskNote = async (message: TelegramBot.Message) => {
   await telegramClient.sendMessage(message?.chat.id as ChatId, relevantInformation);
 }
 
-const createNote = async (chatId: ChatId) => {
+const writeNote = async (chatId: ChatId) => {
   const inputNoteMesage = await telegramClient.sendMessage(chatId as ChatId, MESSAGE.ADD_NOTE_INPUT_MESSAGE, {
     reply_markup: {
       force_reply: true,
@@ -68,7 +68,7 @@ const askNotes = async (chatId: ChatId) => {
 
 
 const interactionHandler = {
-  createNote,
+  writeNote,
   askNotes
 }
 

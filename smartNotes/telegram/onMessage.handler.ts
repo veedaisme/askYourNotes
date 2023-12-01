@@ -7,7 +7,7 @@ import interactionHandler from "./interactionHandler";
 
 const buttons = [
   [
-    { text: ACTION_MESSAGE.ADD_NOTES, callback_data: NOTES_INLINE_BUTTON_ACTION.ADD_NOTES },
+    { text: ACTION_MESSAGE.ADD_NOTES, callback_data: NOTES_INLINE_BUTTON_ACTION.WRITE_NOTE },
     { text: ACTION_MESSAGE.ASK_NOTES, callback_data: NOTES_INLINE_BUTTON_ACTION.ASK_NOTES },
   ]
 ];
@@ -30,8 +30,8 @@ telegramClient.on('message', async function (messageInfo) {
     return;
   }
 
-  if (message === BOT_COMMANDS.CREATE_NOTE) {
-    await interactionHandler.createNote(chatId);
+  if (message === BOT_COMMANDS.WRITE_NOTE) {
+    await interactionHandler.writeNote(chatId);
     return;
   }
   

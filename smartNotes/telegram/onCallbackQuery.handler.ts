@@ -7,8 +7,8 @@ import interactionHandler from "./interactionHandler";
 telegramClient.on('callback_query', async (callbackQuery) => {
   const callbackData = callbackQuery.data;
 
-  if (callbackData === NOTES_INLINE_BUTTON_ACTION.ADD_NOTES) {
-    await interactionHandler.createNote(callbackQuery.message?.chat.id as ChatId);
+  if (callbackData === NOTES_INLINE_BUTTON_ACTION.WRITE_NOTE) {
+    await interactionHandler.writeNote(callbackQuery.message?.chat.id as ChatId);
 
     await telegramClient.answerCallbackQuery(callbackQuery.id);
     
