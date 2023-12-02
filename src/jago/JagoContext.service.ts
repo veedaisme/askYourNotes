@@ -6,7 +6,8 @@ class JagoContextService extends IContextService {
     super(VECTOR_COLLECTION_NAME.JAGO);
   }
 
-  addReference(document: string, metadata: unknown): Promise<void> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  addReference(_document: string, _metadata: unknown): Promise<void> {
     throw new Error("Method not implemented.");
   }
 }

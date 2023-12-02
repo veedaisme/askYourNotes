@@ -1,5 +1,5 @@
 {
-  "name": "askveedabot",
+  "name": "askyournotes",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,11 +7,10 @@
     "node": "=18.12.1"
   },
   "scripts": {
-    "start": "cross-env isStream=false node dist/jagoTelegram",
-    "start:dev:jago": "cross-env isStream=false ts-node jago",
-    "start:dev:notes": "cross-env isStream=false ts-node smartNotes",
-    "start:admin": "cross-env isAdminMode=true node chat.js",
-    "remap": "cross-env node remapped.js",
+    "start:dev:jago": "cross-env isStream=false ts-node src/jago",
+    "start:dev:notes": "cross-env isStream=false ts-node src/smartNotes",
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

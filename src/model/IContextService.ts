@@ -45,6 +45,7 @@ abstract class IContextService {
   async addReferences(documents: string[], metadata?: Metadata) {
     const collection = await this.db.collection(this.collectionName);    
   
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const collectionObject = documents.reduce((prev: any, document) => { 
       const { ids, metadatas, documents } = prev;
   

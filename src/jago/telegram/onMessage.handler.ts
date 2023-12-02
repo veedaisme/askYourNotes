@@ -1,4 +1,4 @@
-import config from "../../config";
+import config from "../../../config";
 import telegramClient from "./jagoTelegram.client";
 import TelegramBot from "node-telegram-bot-api";
 import { JAGO_INLINE_BUTTON_ACTION } from '../constants';

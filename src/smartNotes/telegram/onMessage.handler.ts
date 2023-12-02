@@ -1,4 +1,4 @@
-import config from "../../config";
+import config from "../../../config";
 import telegramClient from "./smartNotesTelegram.client";
 import { NOTES_INLINE_BUTTON_ACTION } from '../constants';
 import { ACTION_MESSAGE, MESSAGE } from "./message.enum";

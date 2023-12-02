@@ -1,6 +1,6 @@
 import axios from "axios";
 import IBaseLLMProcessor from "../../model/IBaseLLMProcessor";
-import config from "../../config";
+import config from "../../../config";
 
 class HuggingFaceClient extends IBaseLLMProcessor {
   private completionPath = '/v1/chat/completions';
