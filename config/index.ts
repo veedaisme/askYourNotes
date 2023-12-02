@@ -4,7 +4,8 @@ const configParameter = {
   flattenKnowledgeFileName: 'baseKnowledge/flatten.json',
   llmBaseUrl: "http://192.168.68.120:1234",
   timeout: 600000,
-  isOffline: false
+  isOffline: false,
+  chromaDbBaseUrl: process.env.CHROMA_BASE_URL || "http://127.0.0.1:8000",
 }
 
 const creds = {

@@ -6,7 +6,9 @@ class VectorDbClient extends ChromaClient {
   private embeddingFunction: OpenAIEmbeddingFunction;
 
   constructor(config: IVectorDbConfig) {
-    super();
+    super({
+      path: config.baseUrl,
+    });
 
     this.embeddingFunction = new OpenAIEmbeddingFunction({
       openai_api_key: config.embedderApiKey,

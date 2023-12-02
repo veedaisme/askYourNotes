@@ -1,4 +1,4 @@
-type Embedding = Array<Number>;
+type Embedding = Array<number>;
 type Embeddings = Array<Embedding>;
 type Metadata = Record<string, string | number | boolean>;
 type Metadatas = Array<Metadata>;
