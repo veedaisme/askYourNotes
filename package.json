@@ -7,6 +7,8 @@
     "node": "=18.12.1"
   },
   "scripts": {
+    "start:notes": "cross-env node dist/src/smartNotes",
+    "start:jago": "cross-env node dist/src/jago",
     "start:dev:jago": "cross-env isStream=false ts-node src/jago",
     "start:dev:notes": "cross-env isStream=false ts-node src/smartNotes",
     "build": "tsc -p tsconfig.json",
