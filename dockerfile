@@ -1,10 +1,13 @@
 FROM node:18.12.1-bullseye-slim
 
-ARG DIST_FILE
-ARG NODE_MODULES
+ARG BOT_NAME
+
+COPY . .
+RUN npm install
+RUN npm run build
 
 WORKDIR /app
-COPY ${NODE_MODULES} /app/node_modules/
-COPY ${DIST_FILE} /app/
+COPY node_modules /app/node_modules/
+COPY dist /app/
 
-CMD node src/smartNotes
+CMD node src/${BOT_NAME}

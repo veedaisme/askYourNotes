@@ -8,8 +8,8 @@ const configParameter = {
 }
 
 const creds = {
-  telegramToken: process.env.TELEGRAM_TOKEN,
-  openAIKey: process.env.OPENAI_KEY
+  telegramToken: process.env.TELEGRAM_TOKEN as string,
+  openAIKey: process.env.OPENAI_KEY as string
 };
 
 const config = {
