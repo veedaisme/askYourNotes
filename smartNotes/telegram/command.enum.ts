@@ -1,5 +1,5 @@
 export enum BOT_COMMANDS {
   START = '/start',
-  WRITE_NOTE = '/writeNote',
-  ASK_NOTE = '/askMyNotes',
+  WRITE_NOTE = '/write',
+  ASK_NOTE = '/ask',
 }

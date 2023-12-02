@@ -66,10 +66,15 @@ const askNotes = async (chatId: ChatId) => {
   telegramClient.onReplyToMessage(inputNoteMesage.chat.id, inputNoteMesage.message_id, handleReplyAskNote);
 }
 
+const askNotesSeamless = async (message: TelegramBot.Message) => {
+  await handleReplyAskNote(message);
+}
+
 
 const interactionHandler = {
   writeNote,
-  askNotes
+  askNotes,
+  askNotesSeamless
 }
 
 export default interactionHandler;

@@ -25,6 +25,11 @@ telegramClient.on('message', async function (messageInfo) {
     return;
   }
 
+  if (messageInfo.reply_to_message?.from?.is_bot || messageInfo.from?.is_bot) {
+    console.warn(`[SKIP] abort processing message since this is reply for bot message "${messageInfo.reply_to_message?.text}"`)
+    return;
+  }
+
   if (message === BOT_COMMANDS.START) {
     await telegramClient.sendMessage(chatId, MESSAGE.WELCOME, { reply_markup: inlineKeyboardMarkup });
     return;
@@ -34,10 +39,12 @@ telegramClient.on('message', async function (messageInfo) {
     await interactionHandler.writeNote(chatId);
     return;
   }
-  
+
   if (message === BOT_COMMANDS.ASK_NOTE) {
     await interactionHandler.askNotes(chatId);
     return;
   }
+
+  await interactionHandler.askNotesSeamless(messageInfo );
 });
 

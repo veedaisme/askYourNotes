@@ -45,20 +45,27 @@ class SmartNotesService {
   }
 
   async askNote(query: string, metadata: IMetadataInput): Promise<string> {
-    
+
     const contextQuery = await this.getQueryToContextService(query);
-    
+
     // TODO(fakhri): enhance metadata identifier for query to context
     const context = await this.contextService.query(contextQuery, { identifier: metadata.identifier });
 
     const userQuery = new UserQuery(query).withContext(context);
 
-    const systemQuery = new SystemQuery('You are my Smart Notes Assistant. Please analyze my notes related ' + 
-    'and provide a comprehensive summary that includes the key facts, highlights any existing relationships between them, ' + 
-    'and offers insightful interpretations based on the information I have recorded. You should use the provided documents ' + 
-    'delimited by triple quotes to answer a sentence from me. If the answer cannot be found in the documents, ' + 
-    'answer with "My analysis based on your notes is inconclusive. Further information or research is required for a definitive answer." ' + 
-    'without saying you could not found any reference from document');
+    // const systemQuery = new SystemQuery('You are my Smart Notes Assistant. Please analyze my notes related ' + 
+    // 'and provide a comprehensive summary that includes the key facts, highlights any existing relationships between them, ' + 
+    // 'and offers insightful interpretations based on the information I have recorded. You should use the provided documents ' + 
+    // 'delimited by triple quotes to answer a sentence from me. If the answer cannot be found in the documents, ' + 
+    // 'answer with "My analysis based on your notes is inconclusive. Further information or research is required for a definitive answer." ' + 
+    // 'without saying you could not found any reference from document');
+
+    const systemQuery = new SystemQuery('You are my Smart Notes Assistant. Please analyze my notes, ' +
+      'provide a concise summary that includes the key facts, highlights any existing relationships between them and even giving me additional feedback based on it' +
+      'You could use the provided information from my notes document delimited by triple quotes to answer a sentence from me. ' +
+      'If the answer cannot be found in the documents, ' +
+      'answer with sincere and friendly tone then suggest me that i can input the note as a new note ' +
+      'without saying you could not found any reference from my notes document.');
 
     const answer = await this.llmProcessor.setSystemQuery(systemQuery).setUserQuery(userQuery).exec();
 
