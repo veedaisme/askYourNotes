@@ -18,7 +18,7 @@ const set = (messages = [], userInput: ILocalDbInput) => {
 }
 
 const get = (username: string) => {
-  let currentUserStore = localStore[username];
+  const currentUserStore = localStore[username];
 
   if (!currentUserStore) {
     localStore[username] = [];

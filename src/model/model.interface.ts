@@ -2,7 +2,7 @@ import { CHAT_ROLE } from "../constants";
 
 interface IVectorDbConfig {
   embedderApiKey: string,
-  baseUrl: string
+  baseUrl?: string
 }
 
 interface IChatQuery {

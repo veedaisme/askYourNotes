@@ -5,7 +5,7 @@ const configParameter = {
   llmBaseUrl: "http://192.168.68.120:1234",
   timeout: 600000,
   isOffline: false,
-  chromaDbBaseUrl: process.env.CHROMA_BASE_URL || "http://127.0.0.1:8000",
+  chromaDbBaseUrl: process.env.CHROMA_BASE_URL,
 }
 
 const creds = {
