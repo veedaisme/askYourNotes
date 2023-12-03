@@ -10,7 +10,7 @@ class UserQuery extends IQuery {
     return this;
   }
 
-  toPrompt(): IChatQuery {
+  toChatPrompt(): IChatQuery {
     return {
       role: CHAT_ROLE.USER,
       content: this.query

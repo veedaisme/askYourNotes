@@ -14,8 +14,8 @@ class HuggingFaceClient extends IBaseLLMProcessor {
 
     const payload = {
       messages: [
-        this.systemQuery.toPrompt(),
-        this.userQuery.toPrompt()
+        this.systemQuery.toChatPrompt(),
+        this.userQuery.toChatPrompt()
       ],
       temperature: 0.7,
       max_tokens: -1,

@@ -7,7 +7,11 @@ abstract class IQuery {
     this.query = query;
   }
 
-  abstract toPrompt(): IChatQuery
+  abstract toChatPrompt(): IChatQuery
+
+  getQuery() {
+    return this.query;
+  }
 }
 
 export default IQuery;

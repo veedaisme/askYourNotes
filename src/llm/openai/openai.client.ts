@@ -9,8 +9,8 @@ class OpenAiClient extends IBaseLLMProcessor {
   async exec(): Promise<string> {
     const completion = await this.openai.chat.completions.create({
       messages: [
-        this.systemQuery.toPrompt(),
-        this.userQuery.toPrompt()
+        this.systemQuery.toChatPrompt(),
+        this.userQuery.toChatPrompt()
       ],
       model: "gpt-3.5-turbo",
     });

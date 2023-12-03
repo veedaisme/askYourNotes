@@ -9,7 +9,7 @@ class SystemQuery extends IQuery {
     super(query);
   }
 
-  toPrompt(): IChatQuery {
+  toChatPrompt(): IChatQuery {
     return {
       role: CHAT_ROLE.SYSTEM,
       content: this.query
