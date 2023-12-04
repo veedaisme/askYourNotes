@@ -1,7 +1,7 @@
 import { VECTOR_COLLECTION_NAME } from "../constants";
-import IContextService from "../model/IContextService";
+import ChromaContext from "../context/Chromadb.context";
 
-class JagoContextService extends IContextService {
+class JagoContextService extends ChromaContext {
   constructor() {
     super(VECTOR_COLLECTION_NAME.JAGO);
   }

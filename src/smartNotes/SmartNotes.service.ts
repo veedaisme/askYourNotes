@@ -1,7 +1,6 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 
-import IContextService from '../model/IContextService';
 import SmartNotesContext from './SmartNotesContext.service';
 import { IMetadataInput } from './smartNotes.interface';
 import IBaseLLMProcessor from '../model/IBaseLLMProcessor';
@@ -13,7 +12,7 @@ dayjs.extend(utc)
 
 // TODO(fakhri): implement interface for service
 class SmartNotesService {
-  private contextService: IContextService;
+  private contextService: SmartNotesContext;
   private llmProcessor: IBaseLLMProcessor;
 
   constructor() {

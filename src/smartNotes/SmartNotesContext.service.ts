@@ -1,9 +1,9 @@
 import { VECTOR_COLLECTION_NAME } from "../constants";
-import IContextService from "../model/IContextService";
+import ChromaContext from "../context/Chromadb.context";
 import { Metadata } from "../vectorDb/vectorDb.interface";
 import { IMetadataInput } from "./smartNotes.interface";
 
-class SmartNotesContext extends IContextService {
+class SmartNotesContext extends ChromaContext {
   private metadataConstant = {
     context: 'notes',
     type: 'text'
