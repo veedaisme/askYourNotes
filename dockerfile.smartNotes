@@ -1,14 +1,7 @@
 FROM node:18.12.1-bullseye-slim
 
-COPY . .
-RUN npm install
-RUN npm run build
-
 WORKDIR /app
 COPY /dist ./
-COPY package*.json ./
 COPY node_modules ./node_modules
-
-EXPOSE 3000
 
 CMD ["node", "src/smartNotes"]
