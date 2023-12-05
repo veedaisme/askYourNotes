@@ -28,6 +28,14 @@ class UserQuery extends IQuery {
 
     return this;
   }
+
+  wrapWith(character: string) {
+    const wrappedQuery = `${character} ${this,this.query} ${character}`;
+
+    this.query = wrappedQuery;
+
+    return this;
+  }
 }
 
 export default UserQuery;

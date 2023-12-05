@@ -3,7 +3,6 @@ import utc from 'dayjs/plugin/utc';
 
 import SmartNotesContext from './SmartNotesContext.service';
 import { IMetadataInput, ISmartNotesService } from './smartNotes.interface';
-import IBaseLLMProcessor from '../model/IBaseLLMProcessor';
 import OpenAiClient from '../llm/openai/openai.client';
 import UserQuery from '../model/UserQuery';
 import SystemQuery from '../model/SystemQuery';
@@ -12,7 +11,7 @@ dayjs.extend(utc)
 
 class SmartNotesService implements ISmartNotesService {
   private contextService: SmartNotesContext;
-  private llmProcessor: IBaseLLMProcessor;
+  private llmProcessor: OpenAiClient;
 
   constructor() {
     this.contextService = new SmartNotesContext();
@@ -34,16 +33,6 @@ class SmartNotesService implements ISmartNotesService {
     await this.contextService.addReference(noteWithAdditionalInfo, metadata);
   }
 
-  private async getQueryToContextService(query: string): Promise<string> {
-    const userQuery = new UserQuery(query);
-
-    const systemQuery = new SystemQuery('You are excel at summarizing questions concisely and effectively for querying the vector database');
-
-    const answer = await this.llmProcessor.setSystemQuery(systemQuery).setUserQuery(userQuery).exec();
-
-    return answer;
-  }
-
   private async isSaveNoteInstruction(query: string) {
     const userQuery = new UserQuery(query);
 
@@ -55,11 +44,12 @@ class SmartNotesService implements ISmartNotesService {
   }
 
   private async summarize(query: string) {
-    const userQuery = new UserQuery(query);
+    const userQuery = new UserQuery(query).wrapWith('"""');
 
-    const systemQuery = new SystemQuery('you are very good at converting a text into a json object consisting of 2 concise information, a summary and keywords. each of the keys is only 1 level deep. every question related me is not actual inquiry just summarize the question');
+    const systemQuery = new SystemQuery('You will be provided with a text delimited by triple quotes. first, summary a text what is the topic. second get the keywords from the text. only response with JSON string consisting of summary and keywords keys');
 
-    const answer = await this.llmProcessor.setSystemQuery(systemQuery).setUserQuery(userQuery).exec();
+    const summaryLlmProcessor = new OpenAiClient();
+    const answer = await summaryLlmProcessor.setSystemQuery(systemQuery).setUserQuery(userQuery).setModel('gpt-3.5-turbo-1106').setOutputFormat('json_object').exec();
 
     let summary;
 
@@ -104,13 +94,13 @@ class SmartNotesService implements ISmartNotesService {
       const { summary } = await this.summarize(query);
 
       await this.addNote(summary, metadata);
-      
+
       return true;
     }
 
     return false;
   }
-  
+
   async seamlessQuestion(query: string, metadata: IMetadataInput) {
     return await this.askNote(query, metadata);
   }
