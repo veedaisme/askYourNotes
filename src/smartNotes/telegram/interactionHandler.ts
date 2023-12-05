@@ -66,15 +66,51 @@ const askNotes = async (chatId: ChatId) => {
   telegramClient.onReplyToMessage(inputNoteMesage.chat.id, inputNoteMesage.message_id, handleReplyAskNote);
 }
 
-const askNotesSeamless = async (message: TelegramBot.Message) => {
-  await handleReplyAskNote(message);
+const _seamlessAddNote = async (message: TelegramBot.Message) => {
+  const { text } = message;
+
+  const savedMessageMarkdown = `\`\`\` ${text} \`\`\``;
+
+    await telegramClient.sendMessage(message?.chat.id as ChatId, savedMessageMarkdown, {
+      parse_mode: 'MarkdownV2'
+    });
+    await telegramClient.sendMessage(message?.chat.id as ChatId, MESSAGE.NOTE_SAVED);
+}
+
+const seamless = async (message: TelegramBot.Message) => {
+  const { text } = message;
+  const username = message.chat.username as string;
+
+  await telegramClient.sendChatAction(message?.chat.id as ChatId, 'typing');
+
+  if (!text) {
+    return;
+  }
+
+  const isSaveNotes = await smartNoteService.seamless(text, {
+    identifier: username,
+    source: 'telegram'
+  })
+
+  if (isSaveNotes) {
+    await _seamlessAddNote(message);
+
+    return;
+  }
+
+  const summary = await smartNoteService.seamlessQuestion(text, {
+    identifier: username,
+    source: 'telegram'
+  });
+  
+  await telegramClient.sendMessage(message?.chat.id as ChatId, summary);
 }
 
 
 const interactionHandler = {
   writeNote,
   askNotes,
-  askNotesSeamless
+  seamless
 }
 
 export default interactionHandler;

@@ -45,6 +45,6 @@ telegramClient.on('message', async function (messageInfo) {
     return;
   }
 
-  await interactionHandler.askNotesSeamless(messageInfo );
+  await interactionHandler.seamless(messageInfo);
 });
 

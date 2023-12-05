@@ -27,17 +27,32 @@ class ChromaContext extends IContextService {
     } 
   }
 
-  async query(query: string, metadata: Metadata = {}): Promise<string> {
+  async query(query: string, metadata: Metadata = {}, keywords: string[] = []): Promise<string> {
     const collection = await this.db.collection(this.collectionName);
 
+    const queryText = [query, ...keywords];
+
     const results = await collection.query({
-      nResults: 5,
-      queryTexts: [query],
+      nResults: 2,
+      queryTexts: queryText,
       include: [IncludeEnum.Documents, IncludeEnum.Metadatas],
       where: metadata
     });
+
+    /**
+     * merge result from vector db for multiple query result into 1 result
+     */
+    const mergedDocuments = results.documents.reduce((temporaryMergedDocument, documentPerQuery, ) => {
+      if (!documentPerQuery) {
+        return temporaryMergedDocument;
+      }
+
+      const mergedForInnerDocument = temporaryMergedDocument.concat(documentPerQuery);
+
+      return mergedForInnerDocument;
+    }, [])
     
-    const context = results.documents[0].join(' ');
+    const context = mergedDocuments.join('');
   
     return context;
   }

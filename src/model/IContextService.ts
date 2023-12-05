@@ -7,7 +7,7 @@ abstract class IContextService {
     this.query.bind(this);
   }
 
-  abstract query(query: string, metadata: Metadata): Promise<string>
+  abstract query(query: string, metadata: Metadata, keywords: string[]): Promise<string>
   
   abstract addReferences(documents: string[], metadata?: Metadata): Promise<void>;
 }

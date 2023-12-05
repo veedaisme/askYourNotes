@@ -10,16 +10,21 @@ import SystemQuery from '../model/SystemQuery';
 
 dayjs.extend(utc)
 
-class SmartNotesService implements ISmartNotesService {
+/**
+ * smart notes business logic implemented using langchain
+ */
+class SmartNotesChainService extends ISmartNotesService {
   private contextService: SmartNotesContext;
   private llmProcessor: IBaseLLMProcessor;
 
   constructor() {
+    super();
+
     this.contextService = new SmartNotesContext();
     this.llmProcessor = new OpenAiClient();
   }
 
-  async addNote(note: string, metadata: IMetadataInput, summary?: string) {
+  async addNote(note: string, metadata: IMetadataInput) {
     const currentDate = dayjs().utc().format();
 
     // TODO(fakhri): potentally add summary on the notes
@@ -27,8 +32,6 @@ class SmartNotesService implements ISmartNotesService {
     date: ${currentDate} in UTC
 
     notes: ${note}.
-
-    ${summary ? `summary: ${summary}.` : ''}
     `;
 
     await this.contextService.addReference(noteWithAdditionalInfo, metadata);
@@ -44,44 +47,12 @@ class SmartNotesService implements ISmartNotesService {
     return answer;
   }
 
-  private async isSaveNoteInstruction(query: string) {
-    const userQuery = new UserQuery(query);
-
-    const systemQuery = new SystemQuery('answer with 1 word "true" or "false" whether the user wants to save notes or ask you about their notes');
-
-    const answer = await this.llmProcessor.setSystemQuery(systemQuery).setUserQuery(userQuery).exec();
-
-    return answer.toLowerCase() === 'true';
-  }
-
-  private async summarize(query: string) {
-    const userQuery = new UserQuery(query);
-
-    const systemQuery = new SystemQuery('you are very good at converting a text into a json object consisting of 2 concise information, a summary and keywords. each of the keys is only 1 level deep. every question related me is not actual inquiry just summarize the question');
-
-    const answer = await this.llmProcessor.setSystemQuery(systemQuery).setUserQuery(userQuery).exec();
-
-    let summary;
-
-    try {
-      summary = JSON.parse(answer);
-    } catch (error) {
-      console.warn(`failed on parsing summary from json with answer: ${answer}`);
-      summary = {
-        summary: query,
-        keywords: []
-      }
-    }
-
-    return summary;
-  }
-
   async askNote(query: string, metadata: IMetadataInput): Promise<string> {
 
-    const contextQuery = await this.summarize(query);
+    const contextQuery = await this.getQueryToContextService(query);
 
     // TODO(fakhri): enhance metadata identifier for query to context
-    const context = await this.contextService.query(contextQuery.summary, { identifier: metadata.identifier }, contextQuery.keywords);
+    const context = await this.contextService.query(contextQuery, { identifier: metadata.identifier });
 
     const userQuery = new UserQuery(query).withContext(context);
 
@@ -96,24 +67,6 @@ class SmartNotesService implements ISmartNotesService {
 
     return answer;
   }
-
-  async seamless(query: string, metadata: IMetadataInput) {
-    const isSaveNote = await this.isSaveNoteInstruction(query);
-
-    if (isSaveNote) {
-      const { summary } = await this.summarize(query);
-
-      await this.addNote(summary, metadata);
-      
-      return true;
-    }
-
-    return false;
-  }
-  
-  async seamlessQuestion(query: string, metadata: IMetadataInput) {
-    return await this.askNote(query, metadata);
-  }
 }
 
-export default SmartNotesService;
+export default SmartNotesChainService;
