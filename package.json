@@ -1,6 +1,6 @@
 {
   "name": "askyournotes",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "engines": {
@@ -23,6 +23,7 @@
     "chromadb": "^1.6.1",
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.10",
+    "langchain": "^0.0.200",
     "node-fetch": "^3.3.2",
     "node-telegram-bot-api": "^0.64.0",
     "openai": "^4.20.1",
