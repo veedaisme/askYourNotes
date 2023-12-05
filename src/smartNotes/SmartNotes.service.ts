@@ -93,7 +93,7 @@ class SmartNotesService implements ISmartNotesService {
     if (isSaveNote) {
       const { summary } = await this.summarize(query);
 
-      await this.addNote(summary, metadata);
+      await this.addNote(query, metadata, summary);
 
       return true;
     }
