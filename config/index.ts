@@ -3,6 +3,7 @@ const configParameter = {
   knowledgeFileName: 'baseKnowledge/raw.json',
   flattenKnowledgeFileName: 'baseKnowledge/flatten.json',
   llmBaseUrl: "http://192.168.68.120:1234",
+  ollamaBaseUrl: "http://localhost:11434",
   timeout: 600000,
   isOffline: false,
   chromaDbBaseUrl: process.env.CHROMA_BASE_URL,
