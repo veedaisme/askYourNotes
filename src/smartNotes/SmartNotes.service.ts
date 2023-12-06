@@ -91,7 +91,9 @@ class SmartNotesService implements ISmartNotesService {
     const isSaveNote = await this.isSaveNoteInstruction(query);
 
     if (isSaveNote) {
-      const { summary } = await this.summarize(query);
+      const sanitizedNotes = await this.sanitizeNotes(query);
+      
+      const { summary } = await this.summarize(sanitizedNotes);
 
       await this.addNote(query, metadata, summary);
 
@@ -103,6 +105,16 @@ class SmartNotesService implements ISmartNotesService {
 
   async seamlessQuestion(query: string, metadata: IMetadataInput) {
     return await this.askNote(query, metadata);
+  }
+
+  async sanitizeNotes(text: string) {
+    const systemQuery = new SystemQuery("Remove a word that indicating the user want to save the text");
+
+    const userQuery = new UserQuery(text);
+
+    const answer = await this.llmProcessor.setSystemQuery(systemQuery).setUserQuery(userQuery).exec();
+
+    return answer;
   }
 }
 
