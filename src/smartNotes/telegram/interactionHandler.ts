@@ -66,10 +66,8 @@ const askNotes = async (chatId: ChatId) => {
   telegramClient.onReplyToMessage(inputNoteMesage.chat.id, inputNoteMesage.message_id, handleReplyAskNote);
 }
 
-const _seamlessAddNote = async (message: TelegramBot.Message) => {
-  const { text } = message;
-
-  const savedMessageMarkdown = `\`\`\` ${text} \`\`\``;
+const _seamlessAddNote = async (message: TelegramBot.Message, answer: string) => {
+  const savedMessageMarkdown = `\`\`\` ${answer} \`\`\``;
 
     await telegramClient.sendMessage(message?.chat.id as ChatId, savedMessageMarkdown, {
       parse_mode: 'MarkdownV2'
@@ -87,23 +85,18 @@ const seamless = async (message: TelegramBot.Message) => {
     return;
   }
 
-  const isSaveNotes = await smartNoteService.seamless(text, {
+  const seamlessResponse = await smartNoteService.seamless(text, {
     identifier: username,
     source: 'telegram'
   })
 
-  if (isSaveNotes) {
-    await _seamlessAddNote(message);
+  if (seamlessResponse.isSaveNote) {
+    await _seamlessAddNote(message, seamlessResponse.answer);
 
     return;
   }
-
-  const summary = await smartNoteService.seamlessQuestion(text, {
-    identifier: username,
-    source: 'telegram'
-  });
   
-  await telegramClient.sendMessage(message?.chat.id as ChatId, summary);
+  await telegramClient.sendMessage(message?.chat.id as ChatId, seamlessResponse.answer);
 }
 
 

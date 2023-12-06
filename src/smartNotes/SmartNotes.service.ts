@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 
 import SmartNotesContext from './SmartNotesContext.service';
-import { IMetadataInput, ISmartNotesService } from './smartNotes.interface';
+import { IMetadataInput, ISeamlessResponse, ISmartNotesService } from './smartNotes.interface';
 import OpenAiClient from '../llm/openai/openai.client';
 import UserQuery from '../model/UserQuery';
 import SystemQuery from '../model/SystemQuery';
@@ -66,6 +66,16 @@ class SmartNotesService implements ISmartNotesService {
     return summary;
   }
 
+  private async sanitizeNotes(text: string) {
+    const systemQuery = new SystemQuery("Remove a word that indicating the user want to save the text");
+
+    const userQuery = new UserQuery(text);
+
+    const answer = await this.llmProcessor.setSystemQuery(systemQuery).setUserQuery(userQuery).exec();
+
+    return answer;
+  }
+
   async askNote(query: string, metadata: IMetadataInput): Promise<string> {
 
     const contextQuery = await this.summarize(query);
@@ -87,7 +97,7 @@ class SmartNotesService implements ISmartNotesService {
     return answer;
   }
 
-  async seamless(query: string, metadata: IMetadataInput) {
+  async seamless(query: string, metadata: IMetadataInput): Promise<ISeamlessResponse> {
     const isSaveNote = await this.isSaveNoteInstruction(query);
 
     if (isSaveNote) {
@@ -97,24 +107,18 @@ class SmartNotesService implements ISmartNotesService {
 
       await this.addNote(query, metadata, summary);
 
-      return true;
+      return {
+        isSaveNote,
+        answer: sanitizedNotes
+      };
     }
 
-    return false;
-  }
-
-  async seamlessQuestion(query: string, metadata: IMetadataInput) {
-    return await this.askNote(query, metadata);
-  }
-
-  async sanitizeNotes(text: string) {
-    const systemQuery = new SystemQuery("Remove a word that indicating the user want to save the text");
-
-    const userQuery = new UserQuery(text);
-
-    const answer = await this.llmProcessor.setSystemQuery(systemQuery).setUserQuery(userQuery).exec();
-
-    return answer;
+    const answer = await this.askNote(query, metadata);
+    
+    return {
+      answer,
+      isSaveNote,
+    }
   }
 }
 

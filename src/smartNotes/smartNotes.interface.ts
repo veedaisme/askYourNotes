@@ -8,3 +8,8 @@ export abstract class ISmartNotesService {
 
   abstract askNote(query: string, metadata: IMetadataInput): Promise<string>;
 }
+
+export interface ISeamlessResponse {
+  answer: string,
+  isSaveNote: boolean
+}
