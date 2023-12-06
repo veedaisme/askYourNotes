@@ -18,16 +18,19 @@ class SmartNotesService implements ISmartNotesService {
     this.llmProcessor = new OpenAiClient();
   }
 
-  async addNote(note: string, metadata: IMetadataInput, summary?: string) {
+  async addNote(note: string, metadata: IMetadataInput) {
+    const { summary, keywords } = await this.summarize(note);
+
     const currentDate = dayjs().utc().format();
 
-    // TODO(fakhri): potentally add summary on the notes
     const noteWithAdditionalInfo = `
-    date: ${currentDate} in UTC
+    note's creation date: ${currentDate} in UTC
 
     notes: ${note}.
 
     ${summary ? `summary: ${summary}.` : ''}
+
+    ${keywords.length > 0 ? `keywords: ${keywords.join(', ')}.` : ''}
     `;
 
     await this.contextService.addReference(noteWithAdditionalInfo, metadata);
@@ -102,10 +105,8 @@ class SmartNotesService implements ISmartNotesService {
 
     if (isSaveNote) {
       const sanitizedNotes = await this.sanitizeNotes(query);
-      
-      const { summary } = await this.summarize(sanitizedNotes);
 
-      await this.addNote(query, metadata, summary);
+      await this.addNote(sanitizedNotes, metadata);
 
       return {
         isSaveNote,
