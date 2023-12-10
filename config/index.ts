@@ -7,11 +7,13 @@ const configParameter = {
   timeout: 600000,
   isOffline: false,
   chromaDbBaseUrl: process.env.CHROMA_BASE_URL,
+  mongoDbUser: process.env.MONGO_USER as string,
 }
 
 const creds = {
   telegramToken: process.env.TELEGRAM_TOKEN as string,
-  openAIKey: process.env.OPENAI_KEY as string
+  openAIKey: process.env.OPENAI_KEY as string,
+  mongodbPassword: process.env.MONGO_PASSWORD as string
 };
 
 const config = {

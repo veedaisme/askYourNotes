@@ -1,5 +1,5 @@
 import config from "../../config";
-import VectorDbClient from "./VectorDb";
+import VectorDbClient from "./VectorDbClient";
 
 const vectorDbBaseUrl = config.chromaDbBaseUrl;
 

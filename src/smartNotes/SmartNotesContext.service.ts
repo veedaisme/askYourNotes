@@ -1,35 +1,33 @@
 import { VECTOR_COLLECTION_NAME } from "../constants";
-import ChromaContext from "../context/Chromadb.context";
-import { Metadata } from "../vectorDb/vectorDb.interface";
-import { IMetadataInput } from "./smartNotes.interface";
+import MongodbContext, { IQueryInput } from "../context/MongoDb.context";
 
-class SmartNotesContext extends ChromaContext {
-  private metadataConstant = {
-    context: 'notes',
-    type: 'text'
+class SmartNotesContext extends MongodbContext {
+  constructor() {
+    super(VECTOR_COLLECTION_NAME.NOTES, 'note_db');
   }
 
-  constructor() {
-    super(VECTOR_COLLECTION_NAME.SMART_NOTES);
-  } 
+  async ask(input: Omit<IQueryInput, 'indexInformation'>): Promise<string> {
+    const queryInput: IQueryInput = {
+      ...input,
+      indexInformation: {
+        path: 'noteEmbedding',
+        embeddedIndex: 'notesIndex'
+      }
+    };
 
-  async addReference(document: string, metadataInput: IMetadataInput): Promise<void> {
-    const { identifier, source } = metadataInput 
+    const documents = await this.query(queryInput, {
+      _id: 0,
+      note: 1,
+      createdAt: 1,
+      summary: 1
+    });
 
-    const metadata: Metadata = {
-      context: this.metadataConstant.context,
-      type: this.metadataConstant.type,
-    }
+    const selectedReferences = documents.map(document => `context: ${document.note}
+    summary: ${document.summary ? document.summary : ''}`);
 
-    if (identifier) {
-      metadata.identifier = identifier
-    }
+    const flattenReference = selectedReferences.join('\n');
 
-    if (source) {
-      metadata.source = source
-    }
-
-    await this.addReferences([document], metadata);
+    return flattenReference;
   }
 }
 

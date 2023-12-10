@@ -24,6 +24,7 @@
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.10",
     "langchain": "^0.0.200",
+    "mongodb": "^5.9.2",
     "node-fetch": "^3.3.2",
     "node-telegram-bot-api": "^0.64.0",
     "openai": "^4.20.1",

@@ -2,10 +2,12 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 
 import SmartNotesContext from './SmartNotesContext.service';
-import { IMetadataInput, ISeamlessResponse, ISmartNotesService } from './smartNotes.interface';
-import OpenAiClient from '../llm/openai/openai.client';
+import { ISeamlessResponse, ISmartNotesService } from './smartNotes.interface';
+import OpenAiClient from '../llm/openAi/openAi.client';
 import UserQuery from '../model/UserQuery';
 import SystemQuery from '../model/SystemQuery';
+import { Metadata } from '../vectorDb/vectorDb.interface';
+import { IContextSource } from '../constants';
 
 dayjs.extend(utc)
 
@@ -18,22 +20,23 @@ class SmartNotesService implements ISmartNotesService {
     this.llmProcessor = new OpenAiClient();
   }
 
-  async addNote(note: string, metadata: IMetadataInput) {
+  async addNote(note: string, identifier: string, source: IContextSource, metadata: Metadata) {
     const { summary, keywords } = await this.summarize(note);
 
-    const currentDate = dayjs().utc().format();
-
-    const noteWithAdditionalInfo = `
-    note's creation date: ${currentDate} in UTC
-
-    notes: ${note}.
-
-    ${summary ? `summary: ${summary}.` : ''}
+    const noteWithAdditionalInfo = `notes: ${note}.
 
     ${keywords.length > 0 ? `keywords: ${keywords.join(', ')}.` : ''}
     `;
 
-    await this.contextService.addReference(noteWithAdditionalInfo, metadata);
+    // TODO(fakhri): add keywords to db
+    await this.contextService.addReference({
+      source,
+      summary,
+      document: noteWithAdditionalInfo,
+      type: 'text',
+      metadata: metadata,
+      customerId: identifier,
+    });
   }
 
   private async isSaveNoteInstruction(query: string) {
@@ -79,12 +82,15 @@ class SmartNotesService implements ISmartNotesService {
     return answer;
   }
 
-  async askNote(query: string, metadata: IMetadataInput): Promise<string> {
+  async askNote(query: string, identifier: string): Promise<string> {
 
     const contextQuery = await this.summarize(query);
 
-    // TODO(fakhri): enhance metadata identifier for query to context
-    const context = await this.contextService.query(contextQuery.summary, { identifier: metadata.identifier }, contextQuery.keywords);
+    // TODO(fakhri): enhance metadata / keywords embedding identifier for query to context
+    const context = await this.contextService.ask({
+      query: contextQuery.summary,
+      customerId: identifier   
+    });
 
     const userQuery = new UserQuery(query).withContext(context);
 
@@ -100,27 +106,27 @@ class SmartNotesService implements ISmartNotesService {
     return answer;
   }
 
-  async seamless(query: string, metadata: IMetadataInput): Promise<ISeamlessResponse> {
-    const isSaveNote = await this.isSaveNoteInstruction(query);
+  async seamless(query: string, identifier: string, source: IContextSource): Promise<ISeamlessResponse> {
+    // const isSaveNote = await this.isSaveNoteInstruction(query);
 
-    if (isSaveNote) {
-      const sanitizedNotes = await this.sanitizeNotes(query);
+    // if (isSaveNote) {
+      // const sanitizedNotes = await this.sanitizeNotes(query);
 
-      await this.addNote(sanitizedNotes, metadata);
+      await this.addNote(query, identifier, source, {});
 
       return {
-        isSaveNote,
-        answer: sanitizedNotes
+        isSaveNote: true,
+        answer: query
       };
     }
 
-    const answer = await this.askNote(query, metadata);
+    // const answer = await this.askNote(query, identifier);
     
-    return {
-      answer,
-      isSaveNote,
-    }
-  }
+    // return {
+    //   answer,
+    //   isSaveNote,
+    // }
+  // }
 }
 
 export default SmartNotesService;

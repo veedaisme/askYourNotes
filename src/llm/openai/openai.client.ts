@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 import config from "../../../config";
 import IBaseLLMProcessor from "../../model/IBaseLLMProcessor";
-import { OpenAiModel, OpenAiOutputFormat } from "./openai.interface";
+import { OpenAiModel, OpenAiOutputFormat } from "./openAi.interface";
 
 class OpenAiClient extends IBaseLLMProcessor {
   private API_KEY = config.openAIKey;
@@ -33,7 +33,7 @@ class OpenAiClient extends IBaseLLMProcessor {
       ],
       model: this.model,
       temperature: this.config.temperature,
-      max_tokens: 200,
+      max_tokens: 450,
       response_format: { type: this.format }
     });
 

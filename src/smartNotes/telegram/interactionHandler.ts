@@ -13,7 +13,7 @@ const _handleReplyCreateNote = async (message: TelegramBot.Message) => {
     return;
   }
   
-  await smartNoteService.addNote(note, {
+  await smartNoteService.addNote(note, username, 'telegram', {
     identifier: username,
     source: 'telegram'
   });
@@ -36,10 +36,7 @@ const handleReplyAskNote = async (message: TelegramBot.Message) => {
 
   await telegramClient.sendChatAction(message?.chat.id as ChatId, 'typing');
   
-  const relevantInformation = await smartNoteService.askNote(question, {
-    identifier: username,
-    source: 'telegram'
-  });
+  const relevantInformation = await smartNoteService.askNote(question, username);
 
   await telegramClient.sendMessage(message?.chat.id as ChatId, relevantInformation);
 }
@@ -85,10 +82,7 @@ const seamless = async (message: TelegramBot.Message) => {
     return;
   }
 
-  const seamlessResponse = await smartNoteService.seamless(text, {
-    identifier: username,
-    source: 'telegram'
-  })
+  const seamlessResponse = await smartNoteService.seamless(text, username, 'telegram')
 
   if (seamlessResponse.isSaveNote) {
     await _seamlessAddNote(message, seamlessResponse.answer);
