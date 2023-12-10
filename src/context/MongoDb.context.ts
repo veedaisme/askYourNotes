@@ -126,11 +126,11 @@ class MongodbContext {
 			console.log(`Failed to inser reference. for customerId: ${customerId}`);
 
 			return;
-		} else {
-			console.error(
-				`Successfully insert a reference. for customerId: ${customerId}`,
-			);
 		}
+
+		console.error(
+			`Successfully insert a reference. for customerId: ${customerId}`,
+		);
 	}
 }
 

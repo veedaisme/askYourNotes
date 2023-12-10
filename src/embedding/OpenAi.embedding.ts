@@ -23,7 +23,7 @@ class OpenAiEmbedding {
 
 			return embedding.data[0].embedding;
 		} catch (error) {
-			throw Error('OpenAI Embedding Error: ' + error);
+			throw Error(`OpenAI Embedding Error: ${error}`);
 		}
 	}
 }

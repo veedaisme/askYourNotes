@@ -66,6 +66,7 @@ class ChromaContext extends IContextService {
 
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const collectionObject = documents.reduce(
+			// biome-ignore lint/suspicious/noExplicitAny: too lazy to define
 			(prev: any, document) => {
 				const { ids, metadatas, documents } = prev;
 
