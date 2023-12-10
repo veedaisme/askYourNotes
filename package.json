@@ -7,8 +7,8 @@
 		"node": "=18.12.1"
 	},
 	"scripts": {
-		"start:notes": "cross-env node dist/src/smartNotes",
-		"start:jago": "cross-env node dist/src/jago",
+		"start:notes": "cross-env npm run build && node dist/src/smartNotes",
+		"start:jago": "cross-env npm run build && node dist/src/jago",
 		"start:dev:jago": "cross-env isStream=false nodemon --inspect ./src/jago/index.ts",
 		"start:dev:notes": "cross-env isStream=false nodemon ./src/smartNotes/index.ts",
 		"build": "tsc -p tsconfig.json",
@@ -19,6 +19,12 @@
 	},
 	"author": "",
 	"license": "ISC",
+	"lint-staged": {
+		"*": [
+			"biome check --apply ./src",
+			"git add"
+		]
+	},
 	"dependencies": {
 		"axios": "^1.6.2",
 		"chromadb": "^1.6.1",
@@ -35,6 +41,8 @@
 		"@biomejs/biome": "1.4.1",
 		"@types/node-telegram-bot-api": "^0.63.3",
 		"@types/uuid": "^9.0.7",
+		"husky": "^8.0.3",
+		"lint-staged": "^15.2.0",
 		"nodemon": "^3.0.2",
 		"standard-version": "^9.5.0",
 		"ts-node": "^10.9.1",
