@@ -7,18 +7,10 @@ type ID = string;
 type IDs = Array<ID>;
 
 export interface IAddDocumentInput {
-  ids: ID | IDs;
-  embeddings?: Embedding | Embeddings;
-  metadatas?: Metadata | Metadatas;
-  documents?: string | Documents;
+	ids: ID | IDs;
+	embeddings?: Embedding | Embeddings;
+	metadatas?: Metadata | Metadatas;
+	documents?: string | Documents;
 }
 
-export {
-  Embedding,
-  Embeddings,
-  Metadata,
-  Metadatas,
-  Documents,
-  ID,
-  IDs
-}
+export { Embedding, Embeddings, Metadata, Metadatas, Documents, ID, IDs };

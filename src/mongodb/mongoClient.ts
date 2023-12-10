@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 import config from '../../config';
 
-const {mongoDbUser, mongodbPassword} = config;
+const { mongoDbUser, mongodbPassword } = config;
 
 const uri = `mongodb+srv://${mongoDbUser}:${mongodbPassword}@veeda-dev.ellu317.mongodb.net/?retryWrites=true&w=majority`;
 

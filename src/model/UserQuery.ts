@@ -1,41 +1,34 @@
-import { CHAT_ROLE } from "../constants";
-import IQuery from "./IQuery";
-import { IChatQuery } from "./model.interface";
+import { CHAT_ROLE } from '../constants';
+import IQuery from './IQuery';
+import { IChatQuery } from './model.interface';
 
 class UserQuery extends IQuery {
+	toChatPrompt(): IChatQuery {
+		return {
+			role: CHAT_ROLE.USER,
+			content: this.query,
+		};
+	}
 
-  constructor(query: string) {
-    super(query);
-
-    return this;
-  }
-
-  toChatPrompt(): IChatQuery {
-    return {
-      role: CHAT_ROLE.USER,
-      content: this.query
-    };
-  }
-
-  withContext(context: string) {
-    const queryWithContext = `
+	withContext(context: string) {
+		const queryWithContext = `
       """ ${context} """
 
       sentence: ${this.query}
     `;
 
-    this.query = queryWithContext;
+		this.query = queryWithContext;
 
-    return this;
-  }
+		return this;
+	}
 
-  wrapWith(character: string) {
-    const wrappedQuery = `${character} ${this,this.query} ${character}`;
+	wrapWith(character: string) {
+		const wrappedQuery = `${character} ${this.query} ${character}`;
 
-    this.query = wrappedQuery;
+		this.query = wrappedQuery;
 
-    return this;
-  }
+		return this;
+	}
 }
 
 export default UserQuery;

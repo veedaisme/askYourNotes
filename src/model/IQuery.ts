@@ -1,17 +1,17 @@
-import { IChatQuery } from "./model.interface";
+import { IChatQuery } from './model.interface';
 
 abstract class IQuery {
-  query: string;
+	query: string;
 
-  constructor(query: string) {
-    this.query = query;
-  }
+	constructor(query: string) {
+		this.query = query;
+	}
 
-  abstract toChatPrompt(): IChatQuery
+	abstract toChatPrompt(): IChatQuery;
 
-  getQuery() {
-    return this.query;
-  }
+	getQuery() {
+		return this.query;
+	}
 }
 
 export default IQuery;

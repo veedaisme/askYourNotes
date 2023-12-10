@@ -1,16 +1,13 @@
-import { CHAT_ROLE } from "../constants";
+import { CHAT_ROLE } from '../constants';
 
 interface IVectorDbConfig {
-  embedderApiKey: string,
-  baseUrl?: string
+	embedderApiKey: string;
+	baseUrl?: string;
 }
 
 interface IChatQuery {
-  role: CHAT_ROLE,
-  content: string
+	role: CHAT_ROLE;
+	content: string;
 }
 
-export {
-  IChatQuery,
-  IVectorDbConfig
-}
+export { IChatQuery, IVectorDbConfig };
