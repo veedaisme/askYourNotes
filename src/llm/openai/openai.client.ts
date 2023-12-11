@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 import config from '../../../config';
 import IBaseLLMProcessor from '../../model/IBaseLLMProcessor';
-import { OpenAiModel, OpenAiOutputFormat } from './openAi.interface';
+import { OpenAiModel, OpenAiOutputFormat } from './openai.interface';
 
 class OpenAiClient extends IBaseLLMProcessor {
 	private API_KEY = config.openAIKey;
