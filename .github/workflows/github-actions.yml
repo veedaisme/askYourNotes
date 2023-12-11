@@ -70,6 +70,8 @@ jobs:
         run: bun install --frozen-lockfile
       - name: build-package
         run: npm run build
+        env: 
+          CI: false
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
