@@ -11,7 +11,7 @@
 		"start:jago": "cross-env npm run build && node dist/src/jago",
 		"start:dev:jago": "cross-env isStream=false nodemon --inspect ./src/jago/index.ts",
 		"start:dev:notes": "cross-env isStream=false nodemon ./src/smartNotes/index.ts",
-		"build": "tsc -p tsconfig.json",
+		"build": "cross-env tsc -p tsconfig.json",
 		"lint:fix": "biome check --apply ./src",
 		"lint": "biome ci ./src",
 		"test": "echo \"Error: no test specified\" && exit 1",
