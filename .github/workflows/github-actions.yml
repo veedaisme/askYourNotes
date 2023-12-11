@@ -32,6 +32,12 @@ jobs:
         run: |
           npm run release:patch
           git push --follow-tags origin ${{ github.head_ref }}
+      - name: Cache Bun
+        id: cache-bun
+        uses: actions/cache@v3
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun
 
   build:
     runs-on: ubuntu-latest
@@ -45,11 +51,18 @@ jobs:
       - name: pull latest
         run: git pull origin ${{ github.head_ref }}
       - name: get package version
-        run: PKG_VERSION="$(grep -m 1 '"version":' package.json | cut -d\" -f4)"
+        run: PKG_VERSION="$(grep -m 1 '"version":' package.json | cut -d\" -f4)" && echo $PKG_VERSION
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18.12.1"
+      - name: Restore cached Primes
+        id: cache-bun-restore
+        uses: actions/cache/restore@v3
+        with:
+          path: |
+            ~/.bun/install/cache
+          key: ${{ runner.os }}-bun
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
