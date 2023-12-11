@@ -25,9 +25,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Bump version
-        run: npm run release:patch
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_user_name: Veeda
-          commit_user_email: veeda.dev@skiff.com
-          push_options: "--follow-tags"
+        run: |
+          npm run release:patch
+          git push --follow-tags origin ${{ github.head_ref }}
