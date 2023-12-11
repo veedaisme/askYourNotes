@@ -45,31 +45,6 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref }}
-      - name: pull latest
-        run: git pull origin ${{ github.head_ref }}
-      - name: get package version
-        run: PKG_VERSION="$(grep -m 1 '"version":' package.json | cut -d\" -f4)" && echo $PKG_VERSION
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18.12.1"
-      - name: Restore Cached Bun
-        id: cache-bun-restore
-        uses: actions/cache/restore@v3
-        with:
-          path: |
-            ~/.bun/install/cache
-          key: ${{ runner.os }}-bun
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-      - name: Install dependencies
-        run: bun install --frozen-lockfile
-      - name: build-package
-        run: npm run build --verbose
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
