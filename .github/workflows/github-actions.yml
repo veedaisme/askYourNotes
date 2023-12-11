@@ -1,4 +1,5 @@
 name: Ask Your Notes CI
+
 on:
   push:
     branches:
@@ -31,3 +32,29 @@ jobs:
         run: |
           npm run release:patch
           git push --follow-tags origin ${{ github.head_ref }}
+
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: pull latest
+        run: git pull origin ${{ github.head_ref }}
+      - name: get package version
+        run: PKG_VERSION="$(grep -m 1 '"version":' package.json | cut -d\" -f4)"
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          context: .
+          file: "{{context}}/dockerfile.smartNotes"
+          tags: "iqbaaaaalf/askyournotes:${PKG_VERSION}"
