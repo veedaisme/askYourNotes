@@ -1,3 +1,3 @@
-export type OpenAiModel = 'gpt-3.5-turbo' | 'gpt-3.5-turbo-1106';
+export type OpenAIModel = 'gpt-3.5-turbo' | 'gpt-3.5-turbo-1106';
 
-export type OpenAiOutputFormat = 'json_object' | 'text';
+export type OpenAIOutputFormat = 'json_object' | 'text';

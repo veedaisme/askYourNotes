@@ -1,25 +1,25 @@
 import OpenAI from 'openai';
 import config from '../../../config';
 import IBaseLLMProcessor from '../../model/IBaseLLMProcessor';
-import { OpenAiModel, OpenAiOutputFormat } from './OpenAI.interface';
+import { OpenAIModel, OpenAIOutputFormat } from './openai.interface';
 
 class OpenAIClient extends IBaseLLMProcessor {
 	private API_KEY = config.openAIKey;
 	private openai = new OpenAI({ apiKey: this.API_KEY });
-	private model: OpenAiModel = 'gpt-3.5-turbo';
-	private format: OpenAiOutputFormat = 'text';
+	private model: OpenAIModel = 'gpt-3.5-turbo';
+	private format: OpenAIOutputFormat = 'text';
 
 	private config = {
 		temperature: 0.85,
 	};
 
-	setModel(model: OpenAiModel) {
+	setModel(model: OpenAIModel) {
 		this.model = model;
 
 		return this;
 	}
 
-	setOutputFormat(format: OpenAiOutputFormat) {
+	setOutputFormat(format: OpenAIOutputFormat) {
 		this.format = format;
 
 		return this;
