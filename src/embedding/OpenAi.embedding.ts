@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 import config from '../../config';
 
-class OpenAiEmbedding {
+class OpenAIEmbedding {
 	private openai = new OpenAI({ apiKey: config.openAIKey });
 	private embeddingModel = {
 		ada: {
@@ -28,4 +28,4 @@ class OpenAiEmbedding {
 	}
 }
 
-export default OpenAiEmbedding;
+export default OpenAIEmbedding;
