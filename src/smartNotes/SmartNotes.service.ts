@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 
 import { IContextSource } from '../constants';
-import OpenAiClient from '../llm/openAi/openAi.client';
+import OpenAiClient from '../llm/openAi/openai.client';
 import SystemQuery from '../model/SystemQuery';
 import UserQuery from '../model/UserQuery';
 import { Metadata } from '../vectorDb/vectorDb.interface';
