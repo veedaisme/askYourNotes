@@ -13,7 +13,7 @@ Note:
 
 ## Tech Stack
 - bun (package installer) -- experiment
-- node 18.12.1 (strict)
+- node 18.12.1 `strict`
 - vector db:  MongoDB atlas (or chroma db)
 - LLM: openai API (or hugging face infer or ollama)
 
