@@ -85,4 +85,4 @@ jobs:
           push: true
           context: .
           file: "{context}/dockerfile.smartNotes"
-          tags: iqbaaaaalf/askyournotes:$PKG_VERSION
+          tags: iqbaaaaalf/askyournotes:latest
