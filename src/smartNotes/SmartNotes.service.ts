@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 
 import { IContextSource } from '../constants';
-import OpenAiClient from '../llm/openAi/openai.client';
+import OpenAIClient from '../llm/openAI/openAI.client';
 import SystemQuery from '../model/SystemQuery';
 import UserQuery from '../model/UserQuery';
 import { Metadata } from '../vectorDb/vectorDb.interface';
@@ -13,11 +13,11 @@ dayjs.extend(utc);
 
 class SmartNotesService implements ISmartNotesService {
 	private contextService: SmartNotesContext;
-	private llmProcessor: OpenAiClient;
+	private llmProcessor: OpenAIClient;
 
 	constructor() {
 		this.contextService = new SmartNotesContext();
-		this.llmProcessor = new OpenAiClient();
+		this.llmProcessor = new OpenAIClient();
 	}
 
 	async addNote(
@@ -66,7 +66,7 @@ class SmartNotesService implements ISmartNotesService {
 			'You will be provided with a text delimited by triple quotes. first, summary a text what is the topic. second get the keywords from the text. only response with JSON string consisting of summary and keywords keys',
 		);
 
-		const summaryLlmProcessor = new OpenAiClient();
+		const summaryLlmProcessor = new OpenAIClient();
 		const answer = await summaryLlmProcessor
 			.setSystemQuery(systemQuery)
 			.setUserQuery(userQuery)
