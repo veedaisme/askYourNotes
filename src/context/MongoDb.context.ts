@@ -1,6 +1,6 @@
 import { Collection, Document } from 'mongodb';
 import { IContextSource, VECTOR_COLLECTION_NAME } from '../constants';
-import OpenAIEmbedding from '../embedding/OpenAI.embedding';
+import OpenAIEmbedding from '../embedding/openai.embedding';
 import mongoDbClient from '../mongodb/mongoClient';
 import { Metadata } from '../vectorDb/vectorDb.interface';
 
