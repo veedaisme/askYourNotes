@@ -12,65 +12,61 @@ jobs:
       # added or changed files to the repository.
       contents: write
     steps:
-      - 
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
-      - 
-        name: setup git config
+      - name: setup git config
         run: |
           git config user.name veeda
           git config user.email veeda.dev@skiff.com
-      - 
-        name: Use Node.js
+      - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18.12.1"
-      - 
-        uses: oven-sh/setup-bun@v1
+      - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-      - 
-        name: Install dependencies
+      - name: Install dependencies
         run: bun install
-      - 
-        name: Bump version
+      - name: Bump version
         run: |
           npm run release:patch
           git push --follow-tags origin ${{ github.head_ref }}
 
   build:
     runs-on: ubuntu-latest
+    needs: bump-version
     permissions:
       contents: write
     steps:
-      - 
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
-      - 
-        name: pull latest
+      - name: pull latest
         run: git pull origin ${{ github.head_ref }}
-      - 
-        name: get package version
+      - name: get package version
         run: PKG_VERSION="$(grep -m 1 '"version":' package.json | cut -d\" -f4)"
-      - 
-        name: build-package
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.12.1"
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install
+      - name: build-package
         run: npm run build
-      - 
-        name: Set up QEMU
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
-      - 
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      - 
-        name: Login to Docker Hub
+      - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - 
-        name: Build and push
+      - name: Build and push
         uses: docker/build-push-action@v5
         with:
           push: true
