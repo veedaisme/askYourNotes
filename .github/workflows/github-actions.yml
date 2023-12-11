@@ -75,5 +75,5 @@ jobs:
         with:
           push: true
           context: .
-          file: "${{ context }}/dockerfile.smartNotes"
+          file: "{context}/dockerfile.smartNotes"
           tags: "iqbaaaaalf/askyournotes:${PKG_VERSION}"
