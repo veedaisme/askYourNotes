@@ -1,6 +1,6 @@
 import { Collection, Document } from 'mongodb';
 import { IContextSource, VECTOR_COLLECTION_NAME } from '../constants';
-import OpenAiEmbedding from '../embedding/OpenAi.embedding';
+import OpenAIEmbedding from '../embedding/OpenAI.embedding';
 import mongoDbClient from '../mongodb/mongoClient';
 import { Metadata } from '../vectorDb/vectorDb.interface';
 
@@ -39,7 +39,7 @@ class MongodbContext {
 	private collectionName: VECTOR_COLLECTION_NAME;
 	private kNumber = 2;
 	private mongodb = mongoDbClient;
-	private embedding = new OpenAiEmbedding();
+	private embedding = new OpenAIEmbedding();
 	private dbName: string;
 	private collectionInstance: Collection<Document>;
 
