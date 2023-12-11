@@ -83,6 +83,5 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          context: .
-          file: "{context}/dockerfile.smartNotes"
+          file: dockerfile.smartNotes
           tags: iqbaaaaalf/askyournotes:latest
