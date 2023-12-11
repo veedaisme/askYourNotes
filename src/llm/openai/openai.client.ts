@@ -1,9 +1,9 @@
 import OpenAI from 'openai';
 import config from '../../../config';
 import IBaseLLMProcessor from '../../model/IBaseLLMProcessor';
-import { OpenAiModel, OpenAiOutputFormat } from './openai.interface';
+import { OpenAiModel, OpenAiOutputFormat } from './openAI.interface';
 
-class OpenAiClient extends IBaseLLMProcessor {
+class OpenAIClient extends IBaseLLMProcessor {
 	private API_KEY = config.openAIKey;
 	private openai = new OpenAI({ apiKey: this.API_KEY });
 	private model: OpenAiModel = 'gpt-3.5-turbo';
@@ -43,4 +43,4 @@ class OpenAiClient extends IBaseLLMProcessor {
 	}
 }
 
-export default OpenAiClient;
+export default OpenAIClient;
