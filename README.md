@@ -8,8 +8,14 @@ Note:
 
 ## Features
 
-- Store and Search through your notes using keywords or phrases to quickly find the information you need.
-- Leverage LLM (Large Language Model) capabilities to delivers more than just simple search results. It understands the context of your queries and provides insightful responses.
+- Store and Search through your notes using keywords or phrases to find the information you need quickly.
+- Leverage LLM (Large Language Model) capabilities to deliver more than just simple search results. It understands the context of your queries and provides insightful responses.
+
+## Tech Stack
+- bun (package installer) -- experiment
+- node 18.12.1 (strict)
+- vector db:  MongoDB atlas (or chroma db)
+- LLM: openai API (or hugging face infer or ollama)
 
 ## Installation
 
@@ -24,7 +30,7 @@ git clone https://github.com/iqbaaaaalf/askYourNotes.git
 2. Install the required dependencies:
 ```
 cd askVeedaBot
-npm install
+bun install
 ```
 3. Configure the bot:
 
