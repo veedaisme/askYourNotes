@@ -107,12 +107,22 @@ class MongodbContext {
 	async addReference(input: IAddDocumentInput): Promise<void> {
 		const { document, metadata, source, customerId, summary, keywords } = input;
 
-		const embedding = await this.getEmbedding({
-			query: document,
-			additionalInfo: {
-				userIdentifier: customerId,
-			},
-		});
+		const keywordflatten = keywords.join(' ');
+
+		const [noteEmbedding, keywordEmbedding] = await Promise.all([
+			this.getEmbedding({
+				query: document,
+				additionalInfo: {
+					userIdentifier: customerId,
+				},
+			}),
+			this.getEmbedding({
+				query: keywordflatten,
+				additionalInfo: {
+					userIdentifier: customerId,
+				},
+			}),
+		]);
 
 		const result = await this.collectionInstance.insertOne({
 			customerId,
@@ -121,7 +131,8 @@ class MongodbContext {
 			summary,
 			note: document,
 			keywords,
-			noteEmbedding: embedding,
+			noteEmbedding,
+			keywordEmbedding,
 			createdAt: new Date(),
 			updatedAt: new Date(),
 		});
