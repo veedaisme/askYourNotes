@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 
 import { IContextSource } from '../constants';
@@ -10,6 +11,7 @@ import SmartNotesContext from './SmartNotesContext.service';
 import { ISeamlessResponse, ISmartNotesService } from './smartNotes.interface';
 
 dayjs.extend(utc);
+dayjs.extend(timezone);
 
 class SmartNotesService implements ISmartNotesService {
 	private contextService: SmartNotesContext;
@@ -93,7 +95,6 @@ class SmartNotesService implements ISmartNotesService {
 	async askNote(query: string, identifier: string): Promise<string> {
 		const contextQuery = await this.summarize(query);
 
-		// TODO(fakhri): enhance metadata / keywords embedding identifier for query to context
 		const context = await this.contextService.ask({
 			query: contextQuery.summary,
 			customerId: identifier,
@@ -102,12 +103,16 @@ class SmartNotesService implements ISmartNotesService {
 		const userQuery = new UserQuery(query).withContext(context);
 
 		const systemQuery = new SystemQuery(
-			'You are my Smart Notes Assistant. Please analyze my notes, ' +
-				'provide a concise summary that includes the key facts, highlights any existing relationships between them and even giving me additional feedback based on it' +
-				'You could use the provided information from my notes document delimited by triple quotes to answer a sentence from me. ' +
-				'If the answer cannot be found in the documents, ' +
-				'answer with sincere and friendly tone then suggest me that i can input the note as a new note ' +
-				'without saying you could not found any reference from my notes document.',
+			`you are an advanced AI Notes assistant
+      
+      - your capabilities include but are not limited to advanced reasoning, truthfulness, deep knowledge of advanced topics
+      - the user is the owner of the note
+      - by default, you should respond based on the provided note delimited by triple quotes
+      - you are also capable of carrying on a conversation
+      - the current date is ${dayjs().tz('Asia/Jakarta').format('DD MMMM YYYY')}
+      - the current time is ${dayjs().tz('Asia/Jakarta').format('HH:mm')}
+      - when you don't know the answer or aren't sure you should indicate this to the user, be truthful.
+      `,
 		);
 
 		const answer = await this.llmProcessor
