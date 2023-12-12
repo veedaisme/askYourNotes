@@ -54,7 +54,7 @@ jobs:
           path: ~/.bun/install/cache
           key: ${{ runner.os }}-bun
 
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     needs: bump-version
     permissions:
@@ -75,3 +75,6 @@ jobs:
           push: true
           file: dockerfile.smartNotes
           tags: iqbaaaaalf/askyournotes:latest
+      - name: trigger deploy
+        run: |
+          curl -X POST -H "Content-Type: application/json" ${{ secrets.DEPLOY_HOOK }}
