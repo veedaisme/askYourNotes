@@ -55,7 +55,7 @@ class SmartNotesService implements ISmartNotesService {
 			.setUserQuery(userQuery)
 			.exec();
 
-		return answer.toLowerCase() === 'true';
+		return answer.toLowerCase() === 'yes';
 	}
 
 	private async summarize(query: string) {
