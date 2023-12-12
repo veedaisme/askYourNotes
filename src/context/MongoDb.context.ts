@@ -27,6 +27,7 @@ interface IAddDocumentInput {
 	customerId: string;
 	summary: string;
 	metadata: Metadata;
+  keywords: string[];
 }
 
 export interface IQueryInput {
@@ -104,7 +105,7 @@ class MongodbContext {
 	}
 
 	async addReference(input: IAddDocumentInput): Promise<void> {
-		const { document, metadata, source, customerId, summary } = input;
+		const { document, metadata, source, customerId, summary, keywords } = input;
 
 		const embedding = await this.getEmbedding({
 			query: document,
@@ -119,7 +120,10 @@ class MongodbContext {
 			metadata,
 			summary,
 			note: document,
+      keywords,
 			noteEmbedding: embedding,
+      createdAt: new Date(),
+      updatedAt: new Date()
 		});
 
 		if (!result.acknowledged) {

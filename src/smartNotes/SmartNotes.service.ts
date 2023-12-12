@@ -28,19 +28,15 @@ class SmartNotesService implements ISmartNotesService {
 	) {
 		const { summary, keywords } = await this.summarize(note);
 
-		const noteWithAdditionalInfo = `notes: ${note}.
-
-    ${keywords.length > 0 ? `keywords: ${keywords.join(', ')}.` : ''}
-    `;
-
-		// TODO(fakhri): add keywords to db
+		// TODO(fakhri): add keywords to db and add embedding for it
 		await this.contextService.addReference({
 			source,
 			summary,
-			document: noteWithAdditionalInfo,
+			document: note,
 			type: 'text',
 			metadata: metadata,
 			customerId: identifier,
+      keywords: keywords
 		});
 	}
 
