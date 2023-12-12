@@ -27,7 +27,7 @@ interface IAddDocumentInput {
 	customerId: string;
 	summary: string;
 	metadata: Metadata;
-  keywords: string[];
+	keywords: string[];
 }
 
 export interface IQueryInput {
@@ -120,10 +120,10 @@ class MongodbContext {
 			metadata,
 			summary,
 			note: document,
-      keywords,
+			keywords,
 			noteEmbedding: embedding,
-      createdAt: new Date(),
-      updatedAt: new Date()
+			createdAt: new Date(),
+			updatedAt: new Date(),
 		});
 
 		if (!result.acknowledged) {

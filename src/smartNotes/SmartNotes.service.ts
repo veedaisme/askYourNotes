@@ -36,7 +36,7 @@ class SmartNotesService implements ISmartNotesService {
 			type: 'text',
 			metadata: metadata,
 			customerId: identifier,
-      keywords: keywords
+			keywords: keywords,
 		});
 	}
 
