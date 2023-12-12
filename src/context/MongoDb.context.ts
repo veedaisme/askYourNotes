@@ -11,7 +11,7 @@ interface IEmbeddingInput {
 	};
 }
 
-type MONGODB_PATH = 'noteEmbedding';
+type MONGODB_PATH = 'noteEmbedding' | 'keywordEmbedding';
 
 type MONGODB_INDEX = 'notesIndex';
 
@@ -38,11 +38,14 @@ export interface IQueryInput {
 
 class MongodbContext {
 	private collectionName: VECTOR_COLLECTION_NAME;
-	private kNumber = 2;
+	private kNumber = 3;
+	private numCandidates = 30;
 	private mongodb = mongoDbClient;
 	private embedding = new OpenAIEmbedding();
 	private dbName: string;
 	private collectionInstance: Collection<Document>;
+
+	private keywordEmbeddingPath: MONGODB_PATH = 'keywordEmbedding';
 
 	constructor(collectionName: VECTOR_COLLECTION_NAME, dbName: string) {
 		this.collectionName = collectionName;
@@ -72,36 +75,51 @@ class MongodbContext {
 			},
 		});
 
-		const aggregatePipeline: Document[] = [
-			// vector search only valid as the first stage of pipeline
-			{
-				$vectorSearch: {
-					queryVector: embedding,
-					path: indexInformation.path,
-					numCandidates: 100,
-					limit: this.kNumber,
-					index: indexInformation.embeddedIndex,
-				},
-			},
-			// every pre-filter data needs to be defined on atlas search index definition
-			{
-				$match: {
+		const noteEmbeddingSearch = {
+			$vectorSearch: {
+				queryVector: embedding,
+				path: indexInformation.path,
+				numCandidates: this.numCandidates,
+				limit: this.kNumber,
+				index: indexInformation.embeddedIndex,
+				filter: {
 					customerId,
 				},
 			},
-		];
+		};
 
-		if (projection) {
-			aggregatePipeline.push({
-				$project: projection,
-			});
-		}
+		const keywordEmbeddingSearch = {
+			$vectorSearch: {
+				queryVector: embedding,
+				path: this.keywordEmbeddingPath,
+				numCandidates: this.numCandidates,
+				limit: this.kNumber,
+				index: indexInformation.embeddedIndex,
+				filter: {
+					customerId,
+				},
+			},
+		};
 
-		const documents = await this.collectionInstance
-			.aggregate(aggregatePipeline)
-			.toArray();
+		const noteSearchPipeline: Document[] = [noteEmbeddingSearch];
 
-		return documents;
+		const keywordSearchPipeline: Document[] = [keywordEmbeddingSearch];
+
+		const [notesBasedOnNote, notesBasedOnKeyword] = await Promise.all([
+			this.collectionInstance.aggregate(noteSearchPipeline).toArray(),
+			this.collectionInstance.aggregate(keywordSearchPipeline).toArray(),
+		]);
+
+		const combinedNotes: Document[] = Array.from(
+			[...notesBasedOnNote, ...notesBasedOnKeyword]
+				.reduce((temporary, currentNote) => {
+					temporary.set(currentNote._id.toString(), currentNote);
+					return temporary;
+				}, new Map())
+				.values(),
+		);
+
+		return combinedNotes;
 	}
 
 	async addReference(input: IAddDocumentInput): Promise<void> {
