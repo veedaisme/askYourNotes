@@ -40,11 +40,14 @@ class SmartNotesService implements ISmartNotesService {
 		});
 	}
 
-	private async isSaveNoteInstruction(query: string) {
+	private async isQuestion(query: string) {
 		const userQuery = new UserQuery(query);
 
 		const systemQuery = new SystemQuery(
-			'answer with 1 word "true" or "false" whether the user wants to save notes or ask you about their notes',
+			`you are very good at distinguishing whether an input is a question.
+
+      if the input is a question, respond with "yes"
+      if the input is not a question, respond with "no"`,
 		);
 
 		const answer = await this.llmProcessor
@@ -87,21 +90,6 @@ class SmartNotesService implements ISmartNotesService {
 		return summary;
 	}
 
-	private async sanitizeNotes(text: string) {
-		const systemQuery = new SystemQuery(
-			'Remove a word that indicating the user want to save the text',
-		);
-
-		const userQuery = new UserQuery(text);
-
-		const answer = await this.llmProcessor
-			.setSystemQuery(systemQuery)
-			.setUserQuery(userQuery)
-			.exec();
-
-		return answer;
-	}
-
 	async askNote(query: string, identifier: string): Promise<string> {
 		const contextQuery = await this.summarize(query);
 
@@ -135,10 +123,16 @@ class SmartNotesService implements ISmartNotesService {
 		identifier: string,
 		source: IContextSource,
 	): Promise<ISeamlessResponse> {
-		// const isSaveNote = await this.isSaveNoteInstruction(query);
+		const isQuestion = await this.isQuestion(query);
 
-		// if (isSaveNote) {
-		// const sanitizedNotes = await this.sanitizeNotes(query);
+		if (isQuestion) {
+			const answer = await this.askNote(query, identifier);
+
+			return {
+				answer,
+				isSaveNote: false,
+			};
+		}
 
 		await this.addNote(query, identifier, source, {});
 
@@ -147,14 +141,6 @@ class SmartNotesService implements ISmartNotesService {
 			answer: query,
 		};
 	}
-
-	// const answer = await this.askNote(query, identifier);
-
-	// return {
-	//   answer,
-	//   isSaveNote,
-	// }
-	// }
 }
 
 export default SmartNotesService;
