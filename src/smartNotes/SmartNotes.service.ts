@@ -30,7 +30,6 @@ class SmartNotesService implements ISmartNotesService {
 	) {
 		const { summary, keywords } = await this.summarize(note);
 
-		// TODO(fakhri): add keywords to db and add embedding for it
 		await this.contextService.addReference({
 			source,
 			summary,
@@ -49,7 +48,8 @@ class SmartNotesService implements ISmartNotesService {
 			`you are very good at distinguishing whether an input is a question.
 
       if the input is a question, respond with "yes"
-      if the input is not a question, respond with "no"`,
+      if the input is not a question, respond with "no"
+      if the input is a conversation respond with "no"`,
 		);
 
 		const answer = await this.llmProcessor
