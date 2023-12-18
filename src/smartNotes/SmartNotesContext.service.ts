@@ -17,12 +17,9 @@ class SmartNotesContext extends MongodbContext {
 
 		const documents = await this.query(queryInput);
 
-		const selectedReferences = documents.map(
-			(document) => `context: ${document.note}
-    summary: ${document.summary ? document.summary : ''}`,
-		);
+		const selectedReferences = documents.map((document) => `${document.note}`);
 
-		const flattenReference = selectedReferences.join('\n');
+		const flattenReference = selectedReferences.join('\n\n');
 
 		return flattenReference;
 	}

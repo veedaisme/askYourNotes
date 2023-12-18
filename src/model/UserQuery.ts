@@ -14,7 +14,7 @@ class UserQuery extends IQuery {
 		const queryWithContext = `
       """ ${context} """
 
-      sentence: ${this.query}
+      query: ${this.query}
     `;
 
 		this.query = queryWithContext;

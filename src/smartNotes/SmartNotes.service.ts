@@ -64,10 +64,13 @@ class SmartNotesService implements ISmartNotesService {
 		const userQuery = new UserQuery(query).wrapWith('"""');
 
 		const systemQuery = new SystemQuery(
-			`You will be provided with a text delimited by triple quotes. 
-      first, summary a text what is the topic. 
-      second get the keywords from the text. 
-      only response with JSON string consisting of summary and keywords keys`,
+			`
+      1. Generate a concise summary of the text delimited by triple quotes 
+      2. Decontextualize the summary by adding necessary modifiers to nouns or entire sentences
+      and replacing pronouns (e.g., "it", "he", "she", "they", "this", "that") with the full name of the
+      entities they refer to
+      3. based on the keywords build a list of keywords
+      5. Present the results as a JSON string consisting of summary and keywords.`,
 		);
 
 		const summaryLlmProcessor = new OpenAIClient();
@@ -106,10 +109,11 @@ class SmartNotesService implements ISmartNotesService {
 		const userQuery = new UserQuery(query).withContext(context);
 
 		const systemQuery = new SystemQuery(
-			`you are an advanced AI Notes assistant
+			`you are an advanced Notes assistant AI
       
       - your capabilities include but are not limited to advanced reasoning, truthfulness, deep knowledge of advanced topics
       - the user is the owner of the note
+      - you should response concisely based on the query
       - by default, you should respond based on the provided note delimited by triple quotes
       - you are also capable of carrying on a conversation
       - the current date is ${dayjs().tz('Asia/Jakarta').format('DD MMMM YYYY')}
