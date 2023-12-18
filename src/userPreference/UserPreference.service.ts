@@ -1,5 +1,5 @@
+import UserPreferenceRepository from './UserPreference.repository';
 import { IChatMode } from './userPreference.interface';
-import UserPreferenceRepository from './userPreference.repository';
 
 class UserPreferenceService {
 	private userPreferenceRepository: UserPreferenceRepository;
