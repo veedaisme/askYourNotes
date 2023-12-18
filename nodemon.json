@@ -11,11 +11,6 @@
   "watch": [
     "src/"
   ],
-  "env": {
-    "OPENAI_KEY": "OPENAI_KEY",
-    "TELEGRAM_TOKEN": "TELEGRAM_TOKEN",
-    "MONGO_USER": "MONGO_USER",
-    "MONGO_PASSWORD": "MONGO_PASSWORD"
-  },
+  "env": {},
   "ext": "js,json,ts"
 }
