@@ -1,4 +1,4 @@
-import { ChatId } from 'node-telegram-bot-api';
+import { ChatId, Message } from 'node-telegram-bot-api';
 
 import { NOTES_INLINE_BUTTON_ACTION } from '../constants';
 import interactionHandler from './interactionHandler';
@@ -21,6 +21,12 @@ telegramClient.on('callback_query', async (callbackQuery) => {
 		await interactionHandler.askNotes(callbackQuery.message?.chat.id as ChatId);
 
 		await telegramClient.answerCallbackQuery(callbackQuery.id);
+
+		return;
+	}
+
+	if (callbackData === NOTES_INLINE_BUTTON_ACTION.SWITCH_MODE) {
+		await interactionHandler.switchChatMode(callbackQuery.message as Message);
 
 		return;
 	}

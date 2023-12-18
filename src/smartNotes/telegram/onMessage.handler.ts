@@ -1,26 +1,8 @@
 import config from '../../../config';
-import { NOTES_INLINE_BUTTON_ACTION } from '../constants';
 import { BOT_COMMANDS } from './command.enum';
 import interactionHandler from './interactionHandler';
-import { ACTION_MESSAGE, MESSAGE } from './message.enum';
+import { MESSAGE } from './message.enum';
 import telegramClient from './smartNotesTelegram.client';
-
-const buttons = [
-	[
-		{
-			text: ACTION_MESSAGE.ADD_NOTES,
-			callback_data: NOTES_INLINE_BUTTON_ACTION.WRITE_NOTE,
-		},
-		{
-			text: ACTION_MESSAGE.ASK_NOTES,
-			callback_data: NOTES_INLINE_BUTTON_ACTION.ASK_NOTES,
-		},
-	],
-];
-
-const inlineKeyboardMarkup = {
-	inline_keyboard: buttons,
-};
 
 telegramClient.on('message', async (messageInfo) => {
 	const message = messageInfo.text as string;
@@ -39,9 +21,7 @@ telegramClient.on('message', async (messageInfo) => {
 	}
 
 	if (message === BOT_COMMANDS.START) {
-		await telegramClient.sendMessage(chatId, MESSAGE.WELCOME, {
-			reply_markup: inlineKeyboardMarkup,
-		});
+		await interactionHandler.start(messageInfo);
 		return;
 	}
 
@@ -52,6 +32,11 @@ telegramClient.on('message', async (messageInfo) => {
 
 	if (message === BOT_COMMANDS.ASK_NOTE) {
 		await interactionHandler.askNotes(chatId);
+		return;
+	}
+
+	if (message === BOT_COMMANDS.SWITCH_MODE) {
+		await interactionHandler.switchChatMode(messageInfo);
 		return;
 	}
 

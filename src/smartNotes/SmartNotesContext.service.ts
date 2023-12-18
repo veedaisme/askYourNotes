@@ -15,12 +15,7 @@ class SmartNotesContext extends MongodbContext {
 			},
 		};
 
-		const documents = await this.query(queryInput, {
-			_id: 0,
-			note: 1,
-			createdAt: 1,
-			summary: 1,
-		});
+		const documents = await this.query(queryInput);
 
 		const selectedReferences = documents.map(
 			(document) => `context: ${document.note}

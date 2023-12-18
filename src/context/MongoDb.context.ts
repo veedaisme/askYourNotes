@@ -36,6 +36,19 @@ export interface IQueryInput {
 	indexInformation: IIndexInformation;
 }
 
+interface INotes {
+	customerId: string;
+	source: IContextSource;
+	metadata: Metadata;
+	summary: string;
+	note: string;
+	keywords: string[];
+	noteEmbedding: number[];
+	keywordEmbedding: number[];
+	createdAt: Date;
+	updatedAt: Date;
+}
+
 class MongodbContext {
 	private collectionName: VECTOR_COLLECTION_NAME;
 	private kNumber = 3;
@@ -43,7 +56,7 @@ class MongodbContext {
 	private mongodb = mongoDbClient;
 	private embedding = new OpenAIEmbedding();
 	private dbName: string;
-	private collectionInstance: Collection<Document>;
+	private collectionInstance: Collection<INotes>;
 
 	private keywordEmbeddingPath: MONGODB_PATH = 'keywordEmbedding';
 
@@ -62,10 +75,7 @@ class MongodbContext {
 		);
 	}
 
-	protected async query(
-		input: IQueryInput,
-		projection: Document,
-	): Promise<Document[]> {
+	protected async query(input: IQueryInput): Promise<INotes[]> {
 		const { query, indexInformation, customerId } = input;
 
 		const embedding = await this.getEmbedding({
@@ -110,7 +120,7 @@ class MongodbContext {
 			this.collectionInstance.aggregate(keywordSearchPipeline).toArray(),
 		]);
 
-		const combinedNotes: Document[] = Array.from(
+		const combinedNotes: INotes[] = Array.from(
 			[...notesBasedOnNote, ...notesBasedOnKeyword]
 				.reduce((temporary, currentNote) => {
 					temporary.set(currentNote._id.toString(), currentNote);

@@ -8,9 +8,11 @@ export enum MESSAGE {
 	NOTE_SAVED = '✨ Got it! Your note has been saved. ✨',
 	ADD_NOTE_INPUT_MESSAGE = 'What would you like to note down today? 🌟',
 	ASK_NOTE_INPUT_MESSAGE = "What's the question or topic you'd like to explore in your notes today? 🤔",
+	SUCCESS_SWITCH_CHAT_MODE = '✅ Chat mode updated',
 }
 
 export enum ACTION_MESSAGE {
 	ADD_NOTES = '📝 Add notes',
 	ASK_NOTES = '💬 ask your notes',
+	SWITCH_MODE = 'Switch to',
 }
