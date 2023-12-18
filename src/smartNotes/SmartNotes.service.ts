@@ -60,7 +60,7 @@ class SmartNotesService implements ISmartNotesService {
 		return answer.toLowerCase() === 'yes';
 	}
 
-	private async summarize(query: string) {
+	async summarize(query: string) {
 		const userQuery = new UserQuery(query).wrapWith('"""');
 
 		const systemQuery = new SystemQuery(
@@ -69,7 +69,8 @@ class SmartNotesService implements ISmartNotesService {
       2. Decontextualize the summary by adding necessary modifiers to nouns or entire sentences
       and replacing pronouns (e.g., "it", "he", "she", "they", "this", "that") with the full name of the
       entities they refer to
-      3. based on the keywords build a list of keywords
+      3. change "the speaker" nouns to "I"
+      4. based on the keywords build a list of keywords
       5. Present the results as a JSON string consisting of summary and keywords.`,
 		);
 
