@@ -10,7 +10,7 @@ class UserPreferenceRepository {
 
 	private defaultPreferences: IUserPreferences = {
 		customerId: '',
-		chatMode: 'input',
+		chatMode: 'chat',
 	};
 
 	constructor() {
