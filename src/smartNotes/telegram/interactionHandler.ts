@@ -1,9 +1,6 @@
 import TelegramBot, { ChatId } from 'node-telegram-bot-api';
 import UserPreferenceService from '../../userPreference/UserPreference.service';
-import {
-	IChatMode,
-	IUserPreferences,
-} from '../../userPreference/userPreference.interface';
+import { IChatMode } from '../../userPreference/userPreference.interface';
 import SmartNotesService from '../SmartNotes.service';
 import { NOTES_INLINE_BUTTON_ACTION } from '../constants';
 import { ACTION_MESSAGE, MESSAGE } from './message.enum';
@@ -128,22 +125,26 @@ const seamless = async (message: TelegramBot.Message) => {
 		return;
 	}
 
-	const seamlessResponse = await smartNoteService.seamless(
-		text,
-		username,
-		'telegram',
-	);
+	const chatMode = await userPreferenceService.getChatMode(username);
 
-	if (seamlessResponse.isSaveNote) {
-		await _seamlessAddNote(message, seamlessResponse.answer);
+	if (chatMode === 'chat') {
+		const answer = await smartNoteService.askNote(text, username);
+
+		await telegramClient.sendMessage(message.chat.id as ChatId, answer);
 
 		return;
 	}
 
-	await telegramClient.sendMessage(
-		message?.chat.id as ChatId,
-		seamlessResponse.answer,
-	);
+	if (chatMode === 'input') {
+		await smartNoteService.addNote(text, username, 'telegram', {
+			identifier: username,
+			source: 'telegram',
+		});
+
+		await _seamlessAddNote(message, text);
+
+		return;
+	}
 };
 
 const getStartInlineKeyboard = (inlineInput: {
