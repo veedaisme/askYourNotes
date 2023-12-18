@@ -1,48 +1,48 @@
 {
-	"name": "askyournotes",
-	"version": "1.0.40",
-	"description": "",
-	"main": "index.js",
-	"engines": {
-		"node": "=18.12.1"
-	},
-	"scripts": {
-		"start:notes": "cross-env npm run build && node dist/src/smartNotes",
-		"start:jago": "cross-env npm run build && node dist/src/jago",
-		"start:dev:jago": "cross-env isStream=false nodemon --inspect ./src/jago/index.ts",
-		"start:dev:notes": "cross-env isStream=false nodemon ./src/smartNotes/index.ts",
-		"build": "cross-env tsc -p tsconfig.json",
-		"lint:fix": "biome check --apply ./src",
-		"lint": "biome ci ./src",
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"release:patch": "standard-version --release-as patch"
-	},
-	"author": "",
-	"license": "ISC",
-	"lint-staged": {
-		"*": "biome check --apply ./src && npm run build"
-	},
-	"dependencies": {
-		"axios": "^1.6.2",
-		"chromadb": "^1.6.1",
-		"cross-env": "^7.0.3",
-		"dayjs": "^1.11.10",
-		"langchain": "^0.0.200",
-		"mongodb": "^5.9.2",
-		"node-fetch": "^3.3.2",
-		"node-telegram-bot-api": "^0.64.0",
-		"openai": "^4.20.1",
-		"uuid": "^9.0.1"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "1.4.1",
-		"@types/node-telegram-bot-api": "^0.63.3",
-		"@types/uuid": "^9.0.7",
-		"husky": "^8.0.3",
-		"lint-staged": "^15.2.0",
-		"nodemon": "^3.0.2",
-		"standard-version": "^9.5.0",
-		"ts-node": "^10.9.1",
-		"typescript": "^5.3.2"
-	}
+  "name": "askyournotes",
+  "version": "1.0.40",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "=18.12.1"
+  },
+  "scripts": {
+    "start:notes": "cross-env npm run build && node dist/src/smartNotes",
+    "start:jago": "cross-env npm run build && node dist/src/jago",
+    "start:dev:jago": "cross-env isStream=false nodemon --inspect ./src/jago/index.ts",
+    "start:dev:notes": "cross-env isStream=false nodemon ./src/smartNotes/index.ts",
+    "build": "cross-env tsc -p tsconfig.json",
+    "lint:fix": "biome check --apply ./src",
+    "lint": "biome ci ./src",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release:patch": "standard-version --release-as patch"
+  },
+  "author": "",
+  "license": "ISC",
+  "lint-staged": {
+    "*": "biome check --apply ./src && npm run build"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "chromadb": "^1.6.1",
+    "cross-env": "^7.0.3",
+    "dayjs": "^1.11.10",
+    "langchain": "^0.0.207",
+    "mongodb": "^5.9.2",
+    "node-fetch": "^3.3.2",
+    "node-telegram-bot-api": "^0.64.0",
+    "openai": "^4.20.1",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.4.1",
+    "@types/node-telegram-bot-api": "^0.63.3",
+    "@types/uuid": "^9.0.7",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "nodemon": "^3.0.2",
+    "standard-version": "^9.5.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.2"
+  }
 }

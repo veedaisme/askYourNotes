@@ -64,7 +64,10 @@ class SmartNotesService implements ISmartNotesService {
 		const userQuery = new UserQuery(query).wrapWith('"""');
 
 		const systemQuery = new SystemQuery(
-			'You will be provided with a text delimited by triple quotes. first, summary a text what is the topic. second get the keywords from the text. only response with JSON string consisting of summary and keywords keys',
+			`You will be provided with a text delimited by triple quotes. 
+      first, summary a text what is the topic. 
+      second get the keywords from the text. 
+      only response with JSON string consisting of summary and keywords keys`,
 		);
 
 		const summaryLlmProcessor = new OpenAIClient();

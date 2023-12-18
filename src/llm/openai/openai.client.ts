@@ -13,6 +13,14 @@ class OpenAIClient extends IBaseLLMProcessor {
 		temperature: 0.85,
 	};
 
+	private maxTokenResponse: number;
+
+	constructor({ maxTokenResponse }: { maxTokenResponse?: number } = {}) {
+		super();
+
+		this.maxTokenResponse = maxTokenResponse ?? 450;
+	}
+
 	setModel(model: OpenAIModel) {
 		this.model = model;
 
@@ -33,7 +41,7 @@ class OpenAIClient extends IBaseLLMProcessor {
 			],
 			model: this.model,
 			temperature: this.config.temperature,
-			max_tokens: 450,
+			max_tokens: this.maxTokenResponse,
 			response_format: { type: this.format },
 		});
 
