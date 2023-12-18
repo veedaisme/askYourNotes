@@ -11,7 +11,7 @@ interface IEmbeddingInput {
 	};
 }
 
-type MONGODB_PATH = 'noteEmbedding' | 'keywordEmbedding';
+type MONGODB_PATH = 'noteEmbedding' | 'summaryEmbedding';
 
 type MONGODB_INDEX = 'notesIndex';
 
@@ -44,7 +44,7 @@ interface INotes {
 	note: string;
 	keywords: string[];
 	noteEmbedding: number[];
-	keywordEmbedding: number[];
+	summaryEmbedding: number[];
 	createdAt: Date;
 	updatedAt: Date;
 }
@@ -58,7 +58,7 @@ class MongodbContext {
 	private dbName: string;
 	private collectionInstance: Collection<INotes>;
 
-	private keywordEmbeddingPath: MONGODB_PATH = 'keywordEmbedding';
+	private summaryEmbedding: MONGODB_PATH = 'summaryEmbedding';
 
 	constructor(collectionName: VECTOR_COLLECTION_NAME, dbName: string) {
 		this.collectionName = collectionName;
@@ -98,10 +98,10 @@ class MongodbContext {
 			},
 		};
 
-		const keywordEmbeddingSearch = {
+		const summaryEmbeddingSearch = {
 			$vectorSearch: {
 				queryVector: embedding,
-				path: this.keywordEmbeddingPath,
+				path: this.summaryEmbedding,
 				numCandidates: this.numCandidates,
 				limit: this.kNumber,
 				index: indexInformation.embeddedIndex,
@@ -113,15 +113,15 @@ class MongodbContext {
 
 		const noteSearchPipeline: Document[] = [noteEmbeddingSearch];
 
-		const keywordSearchPipeline: Document[] = [keywordEmbeddingSearch];
+		const summarySearchPipeline: Document[] = [summaryEmbeddingSearch];
 
-		const [notesBasedOnNote, notesBasedOnKeyword] = await Promise.all([
+		const [notesBasedOnNote, notesBasedOnSummary] = await Promise.all([
 			this.collectionInstance.aggregate(noteSearchPipeline).toArray(),
-			this.collectionInstance.aggregate(keywordSearchPipeline).toArray(),
+			this.collectionInstance.aggregate(summarySearchPipeline).toArray(),
 		]);
 
 		const combinedNotes: INotes[] = Array.from(
-			[...notesBasedOnNote, ...notesBasedOnKeyword]
+			[...notesBasedOnNote, ...notesBasedOnSummary]
 				.reduce((temporary, currentNote) => {
 					temporary.set(currentNote._id.toString(), currentNote);
 					return temporary;
@@ -137,7 +137,7 @@ class MongodbContext {
 
 		const keywordflatten = keywords.join(' ');
 
-		const [noteEmbedding, keywordEmbedding] = await Promise.all([
+		const [noteEmbedding, summaryEmbedding] = await Promise.all([
 			this.getEmbedding({
 				query: document,
 				additionalInfo: {
@@ -145,7 +145,7 @@ class MongodbContext {
 				},
 			}),
 			this.getEmbedding({
-				query: keywordflatten,
+				query: summary,
 				additionalInfo: {
 					userIdentifier: customerId,
 				},
@@ -160,7 +160,7 @@ class MongodbContext {
 			note: document,
 			keywords,
 			noteEmbedding,
-			keywordEmbedding,
+			summaryEmbedding,
 			createdAt: new Date(),
 			updatedAt: new Date(),
 		});
