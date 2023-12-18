@@ -51,7 +51,7 @@ interface INotes {
 
 class MongodbContext {
 	private collectionName: VECTOR_COLLECTION_NAME;
-	private kNumber = 3;
+	private kNumber = 5;
 	private numCandidates = 30;
 	private mongodb = mongoDbClient;
 	private embedding = new OpenAIEmbedding();
@@ -134,8 +134,6 @@ class MongodbContext {
 
 	async addReference(input: IAddDocumentInput): Promise<void> {
 		const { document, metadata, source, customerId, summary, keywords } = input;
-
-		const keywordflatten = keywords.join(' ');
 
 		const [noteEmbedding, summaryEmbedding] = await Promise.all([
 			this.getEmbedding({
