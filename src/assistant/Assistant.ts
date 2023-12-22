@@ -68,8 +68,6 @@ class Assistant {
 			customerThreadId.threadId,
 		);
 
-		console.log(`threadId: ${this.thread.id}`);
-
 		return this;
 	}
 
@@ -86,6 +84,10 @@ class Assistant {
 	}
 
 	async exec(): Promise<string> {
+		if (!this.assistant) {
+			await this.init();
+		}
+
 		this.run = await this.openAI.beta.threads.runs.create(this.thread.id, {
 			assistant_id: this.assistant.id,
 			instructions: `you are an advanced Notes assistant AI
