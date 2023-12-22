@@ -1,5 +1,5 @@
 import { ChromaClient, OpenAIEmbeddingFunction } from 'chromadb';
-import { VECTOR_COLLECTION_NAME } from '../constants';
+import { DB_COLLECTION_NAME } from '../constants';
 import { IVectorDbConfig } from '../model/model.interface';
 
 class VectorDbClient extends ChromaClient {
@@ -19,14 +19,14 @@ class VectorDbClient extends ChromaClient {
 		this.deleteCollection.bind(this);
 	}
 
-	collection(vectorCollectionName: VECTOR_COLLECTION_NAME) {
+	collection(vectorCollectionName: DB_COLLECTION_NAME) {
 		return this.getCollection({
 			name: vectorCollectionName,
 			embeddingFunction: this.embeddingFunction,
 		});
 	}
 
-	addCollection(vectorCollectionName: VECTOR_COLLECTION_NAME) {
+	addCollection(vectorCollectionName: DB_COLLECTION_NAME) {
 		return this.createCollection({
 			name: vectorCollectionName,
 			embeddingFunction: this.embeddingFunction,
@@ -36,7 +36,7 @@ class VectorDbClient extends ChromaClient {
 		});
 	}
 
-	dropCollection(vectorCollectionName: VECTOR_COLLECTION_NAME) {
+	dropCollection(vectorCollectionName: DB_COLLECTION_NAME) {
 		return this.deleteCollection({
 			name: vectorCollectionName,
 		});

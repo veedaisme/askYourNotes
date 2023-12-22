@@ -1,9 +1,9 @@
-import { VECTOR_COLLECTION_NAME } from '../constants';
+import { DB_COLLECTION_NAME } from '../constants';
 import MongodbContext, { IQueryInput } from '../context/MongoDb.context';
 
 class SmartNotesContext extends MongodbContext {
 	constructor() {
-		super(VECTOR_COLLECTION_NAME.NOTES, 'note_db');
+		super(DB_COLLECTION_NAME.NOTES, 'note_db');
 	}
 
 	async ask(input: Omit<IQueryInput, 'indexInformation'>): Promise<string> {

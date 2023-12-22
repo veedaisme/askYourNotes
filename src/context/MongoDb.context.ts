@@ -1,5 +1,5 @@
 import { Collection, Document } from 'mongodb';
-import { IContextSource, VECTOR_COLLECTION_NAME } from '../constants';
+import { DB_COLLECTION_NAME, IContextSource } from '../constants';
 import OpenAIEmbedding from '../embedding/openai.embedding';
 import mongoDbClient from '../mongodb/mongoClient';
 import { Metadata } from '../vectorDb/vectorDb.interface';
@@ -50,7 +50,7 @@ interface INotes {
 }
 
 class MongodbContext {
-	private collectionName: VECTOR_COLLECTION_NAME;
+	private collectionName: DB_COLLECTION_NAME;
 	private kNumber = 5;
 	private numCandidates = 30;
 	private mongodb = mongoDbClient;
@@ -60,7 +60,7 @@ class MongodbContext {
 
 	private summaryEmbedding: MONGODB_PATH = 'summaryEmbedding';
 
-	constructor(collectionName: VECTOR_COLLECTION_NAME, dbName: string) {
+	constructor(collectionName: DB_COLLECTION_NAME, dbName: string) {
 		this.collectionName = collectionName;
 		this.dbName = dbName;
 

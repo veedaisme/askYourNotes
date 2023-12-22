@@ -1,15 +1,15 @@
 import { IncludeEnum } from 'chromadb';
 import { v4 as uuidv4 } from 'uuid';
-import { VECTOR_COLLECTION_NAME } from '../constants';
+import { DB_COLLECTION_NAME } from '../constants';
 import IContextService from '../model/IContextService';
 import vectorDbClient from '../vectorDb';
 import { Metadata } from '../vectorDb/vectorDb.interface';
 
 class ChromaContext extends IContextService {
-	private collectionName: VECTOR_COLLECTION_NAME;
+	private collectionName: DB_COLLECTION_NAME;
 	private db = vectorDbClient;
 
-	constructor(collectionName: VECTOR_COLLECTION_NAME) {
+	constructor(collectionName: DB_COLLECTION_NAME) {
 		super();
 
 		this.collectionName = collectionName;
