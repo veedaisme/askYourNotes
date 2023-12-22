@@ -3,9 +3,9 @@ import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 
 import { IContextSource } from '../constants';
-import OpenAIClient from '../llm/openai/openai.client';
 import SystemQuery from '../model/SystemQuery';
 import UserQuery from '../model/UserQuery';
+import OpenAIClient from '../textGenerator/openai/openai.client';
 import { Metadata } from '../vectorDb/vectorDb.interface';
 import SmartNotesContext from './SmartNotesContext.service';
 import { ISeamlessResponse, ISmartNotesService } from './smartNotes.interface';

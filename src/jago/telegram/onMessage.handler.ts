@@ -1,8 +1,8 @@
 import TelegramBot from 'node-telegram-bot-api';
 import config from '../../../config';
-import HuggingFaceClient from '../../llm/huggingFace/huggingFace.client';
 import SystemQuery from '../../model/SystemQuery';
 import UserQuery from '../../model/UserQuery';
+import HuggingFaceClient from '../../textGenerator/huggingFace/huggingFace.client';
 import JagoContextService from '../JagoContext.service';
 import { JAGO_INLINE_BUTTON_ACTION } from '../constants';
 import telegramClient from './jagoTelegram.client';
