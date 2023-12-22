@@ -2,10 +2,12 @@ import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 
+import config from '../../config';
+import Assistant from '../assistant/Assistant';
 import { IContextSource } from '../constants';
-import OpenAIClient from '../llm/openai/openai.client';
 import SystemQuery from '../model/SystemQuery';
 import UserQuery from '../model/UserQuery';
+import OpenAIClient from '../textGenerator/openai/openai.client';
 import { Metadata } from '../vectorDb/vectorDb.interface';
 import SmartNotesContext from './SmartNotesContext.service';
 import { ISeamlessResponse, ISmartNotesService } from './smartNotes.interface';
@@ -99,16 +101,28 @@ class SmartNotesService implements ISmartNotesService {
 		return summary;
 	}
 
-	async askNote(query: string, identifier: string): Promise<string> {
-		const contextQuery = await this.summarize(query);
+	/**
+	 * ask notes with assistant API
+	 * support chat history context
+	 * @param {UserQuery} userQuery
+	 */
+	private async askNoteV2(userQuery: UserQuery, identifier: string) {
+		const assistant = new Assistant(config.askYourNotesAssistantId);
 
-		const context = await this.contextService.ask({
-			query: contextQuery.summary,
-			customerId: identifier,
+		await assistant.createThread({
+			userIdentifier: identifier,
 		});
 
-		const userQuery = new UserQuery(query).withContext(context);
+		await assistant.createMessage(userQuery);
 
+		return await assistant.exec();
+	}
+
+	/**
+	 * ask notes with chat generator api
+	 * @param {UserQuery} userQuery
+	 */
+	private async askNoteV1(userQuery: UserQuery) {
 		const systemQuery = new SystemQuery(
 			`you are an advanced Notes assistant AI
       
@@ -129,6 +143,23 @@ class SmartNotesService implements ISmartNotesService {
 			.exec();
 
 		return answer;
+	}
+
+	async askNote(query: string, identifier: string): Promise<string> {
+		const contextQuery = await this.summarize(query);
+
+		const context = await this.contextService.ask({
+			query: contextQuery.summary,
+			customerId: identifier,
+		});
+
+		const userQuery = new UserQuery(query).withContext(context);
+
+		if (config.isChatV2) {
+			return this.askNoteV2(userQuery, identifier);
+		}
+
+		return this.askNoteV1(userQuery);
 	}
 
 	async seamless(

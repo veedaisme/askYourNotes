@@ -1,9 +1,9 @@
-import { VECTOR_COLLECTION_NAME } from '../constants';
+import { DB_COLLECTION_NAME } from '../constants';
 import ChromaContext from '../context/Chromadb.context';
 
 class JagoContextService extends ChromaContext {
 	constructor() {
-		super(VECTOR_COLLECTION_NAME.JAGO);
+		super(DB_COLLECTION_NAME.JAGO);
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -1,11 +1,12 @@
 import { Collection } from 'mongodb';
+import { DB_COLLECTION_NAME } from '../constants';
 import mongoDbClient from '../mongodb/mongoClient';
 import { IUserPreferences } from './userPreference.interface';
 
 class UserPreferenceRepository {
 	private dbClient = mongoDbClient;
 	private readonly dbName = 'note_db';
-	private readonly collectionName = 'user_preferences';
+	private readonly collectionName = DB_COLLECTION_NAME.USER_PREFERENCES;
 	private collectionInstance: Collection<IUserPreferences>;
 
 	private defaultPreferences: IUserPreferences = {
