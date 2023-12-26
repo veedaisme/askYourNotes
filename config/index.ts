@@ -8,7 +8,7 @@ const configParameter = {
 	isOffline: false,
 	chromaDbBaseUrl: process.env.CHROMA_BASE_URL,
 	mongoDbUser: process.env.MONGO_USER as string,
-	isChatV2: true,
+	isChatV2: process.env.IS_CHAT_V2 === 'true' || false,
 };
 
 const creds = {
