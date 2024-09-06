@@ -11,6 +11,7 @@ import OpenAIClient from '../textGenerator/openai/openai.client';
 import { Metadata } from '../vectorDb/vectorDb.interface';
 import SmartNotesContext from './SmartNotesContext.service';
 import { ISeamlessResponse, ISmartNotesService } from './smartNotes.interface';
+import SmartNotesUtils from './SmartNotes.utils';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -32,10 +33,12 @@ class SmartNotesService implements ISmartNotesService {
 	) {
 		const { summary, keywords } = await this.summarize(note);
 
+		const enrichedNote = SmartNotesUtils.enrichNotesWithMetadata(note);
+
 		await this.contextService.addReference({
 			source,
 			summary,
-			document: note,
+			document: enrichedNote,
 			type: 'text',
 			metadata: metadata,
 			customerId: identifier,
