@@ -16,6 +16,7 @@ const creds = {
 	openAIKey: process.env.OPENAI_KEY as string,
 	mongodbPassword: process.env.MONGO_PASSWORD as string,
 	askYourNotesAssistantId: process.env.ASK_YOUR_NOTES_ASSISTANT_ID as string,
+	anthropicApiKey: process.env.ANTHROPIC_API_KEY as string,
 };
 
 const config = {

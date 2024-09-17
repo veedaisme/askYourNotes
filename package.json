@@ -23,11 +23,15 @@
     "*": "biome check --apply ./src && npm run build"
   },
   "dependencies": {
+    "@langchain/anthropic": "^0.3.1",
+    "@langchain/langgraph": "^0.2.3",
+    "@langchain/langgraph-checkpoint-mongodb": "^0.0.3",
+    "@langchain/mongodb": "^0.1.0",
     "axios": "^1.6.2",
     "chromadb": "^1.6.1",
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.10",
-    "langchain": "^0.0.207",
+    "langchain": "^0.3.2",
     "mongodb": "^5.9.2",
     "node-fetch": "^3.3.2",
     "node-telegram-bot-api": "^0.64.0",

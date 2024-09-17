@@ -6,7 +6,7 @@ import { OpenAIModel, OpenAIOutputFormat } from './openai.interface';
 class OpenAIClient extends IBaseLLMProcessor {
 	private API_KEY = config.openAIKey;
 	private openai = new OpenAI({ apiKey: this.API_KEY });
-	private model: OpenAIModel = 'gpt-3.5-turbo';
+	private model: OpenAIModel = 'gpt-4o-mini';
 	private format: OpenAIOutputFormat = 'text';
 
 	private config = {
