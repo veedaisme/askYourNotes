@@ -9,9 +9,9 @@ import SystemQuery from '../model/SystemQuery';
 import UserQuery from '../model/UserQuery';
 import OpenAIClient from '../textGenerator/openai/openai.client';
 import { Metadata } from '../vectorDb/vectorDb.interface';
+import SmartNotesUtils from './SmartNotes.utils';
 import SmartNotesContext from './SmartNotesContext.service';
 import { ISeamlessResponse, ISmartNotesService } from './smartNotes.interface';
-import SmartNotesUtils from './SmartNotes.utils';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
